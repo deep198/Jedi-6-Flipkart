@@ -44,10 +44,10 @@ public class AdminClient {
             System.out.println("Welcome "+ admin.getName()+" !");
             System.out.println("Choose an option");
             System.out.println("1. Create user");
-            System.out.println("4. Add a new Course");
-            System.out.println("5. Delete Course");
-            System.out.println("6. Display users");
-            System.out.println("7. Logout");
+            System.out.println("2. Add a new Course");
+            System.out.println("3. Delete Course");
+            System.out.println("4. Display users");
+            System.out.println("5. Logout");
 
             int choice = sc.nextInt();
             switch(choice) {
@@ -116,7 +116,7 @@ public class AdminClient {
 
 
                     // insert a new course
-                case 4:
+                case 2:
                     Course course= new Course();
                     System.out.println("Enter CousreId");
                     course.setCourseId(sc.nextInt());
@@ -129,7 +129,7 @@ public class AdminClient {
                     continue;
 
                     // delete an existing course
-                case 5:
+                case 3:
                     System.out.println("Enter CourseId of course to be deleted");
                     int courseId= sc.nextInt();
                     // course deleted from database
@@ -141,7 +141,7 @@ public class AdminClient {
                     continue;
 
                     // view user details
-                case 6:
+                case 4:
                     while(true) {
                         System.out.println("1. View Student Details");
                         System.out.println("2. View Professor Details");
@@ -174,7 +174,7 @@ public class AdminClient {
                     continue;
 
                     // log out as admin
-                case 7:
+                case 5:
                     System.out.println("Succesfully logged out as on "+ currentDate);
                     break;
 
