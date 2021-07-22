@@ -8,7 +8,7 @@ import com.flipkart.exception.InvalidLoginException;
 
 public interface UserInterface {
 
-    User validateUser(String username, String password)throws InvalidLoginException;
+    User validateLogin(String username, String password)throws InvalidLoginException;
     Student fetchStudent(String userName);
     Admin fetchAdmin(String userName);
     Professor fetchProfessor(String userName);
@@ -25,4 +25,6 @@ public interface UserInterface {
     void displayProfessors();
 
     void displayAdmins();
+
+    void updatePassword(String username, String oldPswd, String newPswd);
 }
