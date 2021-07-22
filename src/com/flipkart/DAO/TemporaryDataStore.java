@@ -33,6 +33,7 @@ public class TemporaryDataStore {
 
     public void addProfessor(Professor professor) {
         User user = new User();
+        System.out.println("Adding prof username " + professor.getUserName());
         user.setUserRole(PROFESSOR);
         user.setUserName(professor.getUserName());
         user.setPassword(professor.getPassword());
@@ -63,5 +64,28 @@ public class TemporaryDataStore {
 
     public void updatePassword(String username, String oldPswd, String newPswd) {
         userCredentials.get(username).setPassword(newPswd);
+    }
+
+    public void displayStudents() {
+
+        for (Map.Entry<String, Student> studentEntry : students.entrySet()) {
+            Student student = studentEntry.getValue();
+            System.out.println(student.getUserName() + " " + student.getUserName() + " " + student.getDepartment());
+        }
+
+    }
+
+    public void displayProfessors() {
+        for (Map.Entry<String, Professor> profEntry : professors.entrySet()) {
+            Professor professor = profEntry.getValue();
+            System.out.println(professor.getName() + " " + professor.getUserName() + " " + professor.getDepartment());
+        }
+    }
+
+    public void displayAdmins() {
+        for (Map.Entry<String, Admin> adminEntry : admins.entrySet()) {
+            Admin admin = adminEntry.getValue();
+            System.out.println(admin.toString());
+        }
     }
 }

@@ -39,6 +39,7 @@ public class AdminClient {
         Date currentDate = new Date();
         // display contents of admin client landing page
         System.out.println("Succesfully logged in as ADMIN on "+ currentDate);
+        boolean login = true;
         while(true) {
             // diplay menu list for admin
             System.out.println("Welcome "+ admin.getName()+" !");
@@ -47,7 +48,9 @@ public class AdminClient {
             System.out.println("2. Add a new Course");
             System.out.println("3. Delete Course");
             System.out.println("4. Display users");
-            System.out.println("5. Logout");
+            System.out.println("5. Display Professors");
+            System.out.println("6. Display Students");
+            System.out.println("7. Logout");
 
             int choice = sc.nextInt();
             switch(choice) {
@@ -173,14 +176,22 @@ public class AdminClient {
                     }
                     continue;
 
-                    // log out as admin
+                //Display Professors
                 case 5:
-                    System.out.println("Succesfully logged out as on "+ currentDate);
+                    userOperation.displayProfessors();
+                    break;
+                //Display Students
+                case 6:
+                    userOperation.displayStudents();
                     break;
 
+                    // log out as admin
+                case 7:
+                    System.out.println("Succesfully logged out as on "+ currentDate);
+                    login = false;
+                    break;
             }
-            break;
-
+            if (! login) break;
         }
 
     }

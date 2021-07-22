@@ -35,6 +35,14 @@ public class UserClient {
         professor.setName("Random Prof");
         temporaryDataStore.addProfessor(professor);
 
+        Professor professor2 = new Professor();
+        professor2.setUserName("prof2");
+        professor2.setProfessorId(202);
+        professor2.setDepartment("EEE");
+        professor2.setPassword("pass");
+        professor2.setName("Random Prof2");
+        temporaryDataStore.addProfessor(professor2);
+
         Admin admin = new Admin();
 
         admin.setUserName("admin");
@@ -42,7 +50,16 @@ public class UserClient {
         admin.setPassword("pass");
         admin.setAdminId(101);
 
+        Admin admin2 = new Admin();
+
+        admin2.setUserName("admin2");
+        admin2.setName("Random Admin2");
+        admin2.setPassword("pass");
+        admin2.setAdminId(102);
+
         temporaryDataStore.addAdmin(admin);
+        temporaryDataStore.addAdmin(admin2);
+
         while(true) {
             System.out.println("**WELCOME TO COURSE REGISTRATION SYSTEM****");
             System.out.println("1. Login  ");

@@ -17,8 +17,6 @@ public class UserOperation implements UserInterface{
     @Override
     public User validateLogin(String username, String password) throws InvalidLoginException {
         User user = dataAccess.getUser(username);
-        System.out.println("in validate");
-        System.out.println("User fetched " + user.toString());
         if (user.getPassword().equals(password)) return user;
         //TODO
         return null;
@@ -63,16 +61,19 @@ public class UserOperation implements UserInterface{
 
     @Override
     public void displayStudents() {
+        dataAccess.displayStudents();
 
     }
 
     @Override
     public void displayProfessors() {
+        dataAccess.displayProfessors();
 
     }
 
     @Override
     public void displayAdmins() {
+        dataAccess.displayAdmins();
 
     }
 
