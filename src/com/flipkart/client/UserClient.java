@@ -1,22 +1,32 @@
 package com.flipkart.client;
 
-import java.util.Scanner;
-
-
 import com.flipkart.DAO.TemporaryDataStore;
-import com.flipkart.exception.InvalidLoginException;
+import com.flipkart.DAO.UserDaoInterface;
+import com.flipkart.DAO.UserDaoOperation;
 import com.flipkart.bean.Admin;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.business.UserInterface;
 import com.flipkart.business.UserOperation;
+import com.flipkart.exception.InvalidLoginException;
+
+import java.util.Scanner;
 
 
 public class UserClient {
 
     public static void main(String[] args) {
 
+        User user = new User();
+        user.setUserId(101);
+        user.setUserName("Prav");
+        user.setUserRole("Prof");
+        user.setPassword("pass");
+
+        UserDaoInterface userDaoInterface = new UserDaoOperation();
+
+        userDaoInterface.createUser(user);
         //initializing the scanner
         Scanner sc = new Scanner(System.in);
 

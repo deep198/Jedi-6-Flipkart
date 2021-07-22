@@ -33,7 +33,7 @@ public class TemporaryDataStore {
 
     public void addProfessor(Professor professor) {
         User user = new User();
-        System.out.println("Adding prof username " + professor.getUserName());
+//        System.out.println("Adding prof username " + professor.getUserName());
         user.setUserRole(PROFESSOR);
         user.setUserName(professor.getUserName());
         user.setPassword(professor.getPassword());
