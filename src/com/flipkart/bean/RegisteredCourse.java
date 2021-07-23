@@ -5,7 +5,6 @@ public class RegisteredCourse {
     private int studentId;
     private int courseId;
     private int marks;
-    private int sem;
 
     public int getStudentId() {
         return studentId;
@@ -19,13 +18,6 @@ public class RegisteredCourse {
     }
     public void setCourseId(int courseId) {
         this.courseId = courseId;
-    }
-
-    public int getSem() {
-        return sem;
-    }
-    public void setSem(int sem) {
-        this.sem = sem;
     }
 
     public int getMarks() {

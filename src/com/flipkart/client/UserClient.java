@@ -1,8 +1,6 @@
 package com.flipkart.client;
 
 import com.flipkart.DAO.TemporaryDataStore;
-import com.flipkart.DAO.UserDaoInterface;
-import com.flipkart.DAO.UserDaoOperation;
 import com.flipkart.bean.Admin;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
@@ -13,22 +11,10 @@ import com.flipkart.exception.InvalidLoginException;
 
 import java.util.Scanner;
 
-
 public class UserClient {
 
     public static void main(String[] args) {
 
-        User user = new User();
-        user.setUserId(101);
-        user.setUserName("Prav");
-        user.setUserRole("Prof");
-        user.setPassword("pass");
-
-        UserDaoInterface userDaoInterface = new UserDaoOperation();
-
-        userDaoInterface.createUser(user);
-        User checkedUserTst = userDaoInterface.validateUser(101, "pass");
-        System.out.println(checkedUserTst.getUserName());
         //initializing the scanner
         Scanner sc = new Scanner(System.in);
 
@@ -144,10 +130,6 @@ public class UserClient {
                     System.out.println("Enter your details : ");
                     System.out.println();
                     Student student = new Student();
-                    System.out.println(" Enter your Roll No. : ");
-                    String roll=sc.next();
-                    student.setStudentId(roll);
-                    sc.nextLine();
                     System.out.println("Enter your Username : ");
                     username = sc.next();
                     student.setUserName(username);
@@ -173,7 +155,7 @@ public class UserClient {
 
                     System.out.println("**New Student Created****");
 
-                    System.out.println(roll+" "+name+" "+branch+" " +"\n");
+                    System.out.println(name+" "+branch+" " +"\n");
 
                     break;
 

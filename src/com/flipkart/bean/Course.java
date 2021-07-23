@@ -7,7 +7,6 @@ public class Course {
     private String department;
     private int professorId;
 
-    //NEW ADDED
     private int credits;
     private int studentsEnrolled;
     private String grade;

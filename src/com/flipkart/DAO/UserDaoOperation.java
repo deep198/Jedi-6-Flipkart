@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static com.flipkart.constant.SQLQueries.UPDATE_USER;
 import static com.flipkart.constant.SQLQueries.VALIDATE_USER;
 
 public class UserDaoOperation implements UserDaoInterface{
@@ -64,8 +65,34 @@ public class UserDaoOperation implements UserDaoInterface{
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-//
         return null;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt= null;
+
+        try {
+            //Declaring prepared statement and executing query
+            stmt = connection.prepareStatement(UPDATE_USER);
+            int userId= user.getUserId();
+            String userName = user.getUserName();
+            String password= user.getPassword();
+            String roleName = user.getUserRole();
+
+            stmt.setInt(4, userId);
+            stmt.setString(1, userName);
+            stmt.setString(2, password);
+            stmt.setString(3, roleName);
+
+            //Executing query
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
 }
