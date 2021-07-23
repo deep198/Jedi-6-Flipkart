@@ -6,7 +6,10 @@ import com.flipkart.helper.DBConnectionHelper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static com.flipkart.constant.SQLQueries.VALIDATE_USER;
 
 public class UserDaoOperation implements UserDaoInterface{
 
@@ -36,4 +39,33 @@ public class UserDaoOperation implements UserDaoInterface{
             System.out.println(ex.getMessage());
         }
     }
+
+    @Override
+    public User validateUser(int userId, String password) {
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt= null;
+
+        try {
+            //Declaring prepared statement
+            stmt=connection.prepareStatement(VALIDATE_USER);
+            stmt.setInt(1, userId);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next() )
+            {
+                User checkeduser = new User();
+                checkeduser.setUserName( rs.getString("userName") );
+                checkeduser.setUserRole(rs.getString("userRole"));
+
+                return checkeduser;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+//
+        return null;
+    }
+
 }

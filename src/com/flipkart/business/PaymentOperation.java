@@ -4,7 +4,7 @@ import com.flipkart.bean.Student;
 
 public class PaymentOperation implements PaymentInterface{
     @Override
-    public boolean getPaymentStatus(String studentId) {
+    public boolean getPaymentStatus(int studentId) {
         return false;
     }
 

@@ -3,12 +3,20 @@ package com.flipkart.bean;
 import java.util.List;
 
 public class Student extends User {
-    private String studentId;
+    private int studentId;
     private String name;
     private String department;
     private int sem;
     private List<RegisteredCourse> registeredCourses;
     private boolean paymentStatus;
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
 
     public boolean isPaymentStatus() {
         return paymentStatus;
@@ -18,13 +26,6 @@ public class Student extends User {
         this.paymentStatus = paymentStatus;
     }
 
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
 
     public String getName() {
         return name;

@@ -27,6 +27,8 @@ public class UserClient {
         UserDaoInterface userDaoInterface = new UserDaoOperation();
 
         userDaoInterface.createUser(user);
+        User checkedUserTst = userDaoInterface.validateUser(101, "pass");
+        System.out.println(checkedUserTst.getUserName());
         //initializing the scanner
         Scanner sc = new Scanner(System.in);
 
@@ -95,7 +97,7 @@ public class UserClient {
                     try{
 
                         // validating the user credentials
-                        User checkedUser= userOperation.validateLogin(username, password);
+                        User checkedUser = userOperation.validateLogin(username, password);
                         String userRole = checkedUser.getUserRole();
                         String userName = checkedUser.getUserName();
 

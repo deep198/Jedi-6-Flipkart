@@ -7,4 +7,5 @@ public interface UserDaoInterface {
     public void createUser(User user);
 
 
+    User validateUser(int userId, String password);
 }
