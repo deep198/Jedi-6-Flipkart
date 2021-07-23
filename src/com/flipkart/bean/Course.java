@@ -6,11 +6,16 @@ public class Course {
     private String courseName;
     private String department;
     private int professorId;
-
-    private int credits;
+    private int sem;
     private int studentsEnrolled;
-    private String grade;
 
+    public int getSem() {
+        return sem;
+    }
+
+    public void setSem(int sem) {
+        this.sem = sem;
+    }
 
     public int getStudentsEnrolled() {
         return studentsEnrolled;
@@ -18,14 +23,6 @@ public class Course {
 
     public void setStudentsEnrolled(int studentsEnrolled) {
         this.studentsEnrolled = studentsEnrolled;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
     }
 
     public int getCourseId() {
@@ -50,14 +47,6 @@ public class Course {
 
     public void setDepartment(String department) {
         this.department = department;
-    }
-
-    public int getCredits() {
-        return credits;
-    }
-
-    public void setCredits(int credits) {
-        this.credits = credits;
     }
 
     public int getProfessorId() {

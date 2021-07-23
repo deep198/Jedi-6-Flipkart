@@ -1,85 +1,33 @@
 package com.flipkart.business;
 
-import com.flipkart.DAO.TemporaryDataStore;
-import com.flipkart.bean.Admin;
-import com.flipkart.bean.Professor;
+import com.flipkart.DAO.UserDaoInterface;
+import com.flipkart.DAO.UserDaoOperation;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.exception.InvalidLoginException;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class UserOperation implements UserInterface{
 
-    TemporaryDataStore dataAccess = new TemporaryDataStore();
+    UserDaoInterface userDaoOperation = new UserDaoOperation();
 
     @Override
-    public User validateLogin(String username, String password) throws InvalidLoginException {
-        User user = dataAccess.getUser(username);
-        if (user.getPassword().equals(password)) return user;
-        //TODO
-        return null;
-    }
-
-    @Override
-    public Student fetchStudent(String userName) {
-        return dataAccess.getStudent(userName);
-    }
-
-    @Override
-    public Admin fetchAdmin(String userName) {
-        return dataAccess.getAdmin(userName);
-    }
-
-    @Override
-    public Professor fetchProfessor(String userName) {
-        return dataAccess.getProfessor(userName);
+    public User validateLogin(int userId, String password) throws InvalidLoginException {
+        return userDaoOperation.validateUser(userId, password);
     }
 
     @Override
     public void createUser(User user) {
-
+        userDaoOperation.createUser(user);
     }
 
     @Override
     public void createStudent(Student student) {
-
-        dataAccess.addStudent(student);
-
+        userDaoOperation.createStudent(student);
     }
 
     @Override
-    public void createProfessor(Professor professor) {
-
-    }
-
-    @Override
-    public void createAdmin(Admin newAdmin) {
-
-    }
-
-    @Override
-    public void displayStudents() {
-        dataAccess.displayStudents();
-
-    }
-
-    @Override
-    public void displayProfessors() {
-        dataAccess.displayProfessors();
-
-    }
-
-    @Override
-    public void displayAdmins() {
-        dataAccess.displayAdmins();
-
-    }
-
-    @Override
-    public void updatePassword(String username, String oldPswd, String newPswd) {
-        dataAccess.updatePassword(username, oldPswd, newPswd);
+    public void updatePassword(int userId, String oldPswd, String newPswd) {
+        userDaoOperation.updatePassword(userId, oldPswd, newPswd);
 
     }
 }

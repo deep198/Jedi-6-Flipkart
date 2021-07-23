@@ -11,4 +11,6 @@ public interface StudentDaoInterface {
     public void dropCourse(int courseId, Student student);
     public List<Course> viewCourses(Student student);
     public List<Grade> viewGrades(Student student);
+    public void getUnapproved();
+    public void approveStudent(List<Integer> students);
 }

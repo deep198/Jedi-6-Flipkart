@@ -7,12 +7,11 @@ import com.flipkart.constant.SQLQueries;
 import com.flipkart.helper.CloseConnection;
 import com.flipkart.helper.DBConnectionHelper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.flipkart.constant.SQLQueries.DISPLAY_UNAPPROVED;
 
 public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
     // add a course by student
@@ -88,4 +87,44 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         return null;
     }
+
+    public void getUnapproved(){
+        //Establishing the connection
+        Connection connection = DBConnectionHelper.getConnection();
+        try {
+            //Declaring prepared statement and executing query
+            Statement stmt = connection.createStatement();
+            //Retrieving data
+            ResultSet rs = stmt.executeQuery(DISPLAY_UNAPPROVED);
+            System.out.println("Displaying List of Unapproved Students ");
+            System.out.println();
+            // iterate through the java resultset
+            while (rs.next())
+            {
+                String name = rs.getString("Name");
+                int studentId = rs.getInt("studentId");
+                System.out.println("Name : "+name + " StudentId : " + studentId);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    public void approveStudent(List<Integer> students){
+        //Establishing the connection
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt= null;
+        for(Integer student : students ){
+            try {
+                //Declaring prepared statement and executing query
+                stmt = connection.prepareStatement(SQLQueries.APPROVE_STUD);
+                stmt.setInt(1, student);
+                //Executing query
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
+
 }

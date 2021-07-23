@@ -5,6 +5,16 @@ public class RegisteredCourse {
     private int studentId;
     private int courseId;
     private int marks;
+    private String grade;
+
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 
     public int getStudentId() {
         return studentId;

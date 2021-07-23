@@ -7,6 +7,11 @@ public class StudentOperation implements StudentInterface{
     }
 
     @Override
+    public int addStudent(Student student) {
+        return 0;
+    }
+
+    @Override
     public void addCourse(int courseId, Student student) {
 
 
@@ -21,5 +26,10 @@ public class StudentOperation implements StudentInterface{
     @Override
     public void viewGrades(Student student) {
 
+    }
+
+    @Override
+    public Student fetchStudent(String userName) {
+        return null;
     }
 }

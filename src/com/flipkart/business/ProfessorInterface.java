@@ -6,4 +6,6 @@ public interface ProfessorInterface {
     void selectCourse(int courseId, Professor professor);
 
     void displaySelectedCoursesProfessor(Professor professor);
+
+    Professor fetchProfessor(String userName);
 }

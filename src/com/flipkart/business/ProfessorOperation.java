@@ -12,4 +12,9 @@ public class ProfessorOperation implements ProfessorInterface{
     public void displaySelectedCoursesProfessor(Professor professor) {
 
     }
+
+    @Override
+    public Professor fetchProfessor(String userName) {
+        return null;
+    }
 }

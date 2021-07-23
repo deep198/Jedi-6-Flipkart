@@ -1,5 +1,8 @@
 package com.flipkart.DAO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TemporaryClass {
 
         public static void main(String args[]) {
@@ -41,6 +44,12 @@ public class TemporaryClass {
 //                professorDao.createProfessor(professor2);
 //                professorDao.createProfessor(professor);
 //                professorDao.displayProfessors();
+
+                StudentDaoInterface studentDaoInterface = new StudentDaoOperation();
+                List<Integer> students = new ArrayList<>();
+                students.add(1003);
+                students.add(1004);
+                studentDaoInterface.approveStudent(students);
 
 
 

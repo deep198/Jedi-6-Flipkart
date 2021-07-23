@@ -6,4 +6,6 @@ public interface AdminDaoInterface {
     public void createAdmin(Admin admin);
 
     public void displayAdmins();
+
+    Admin fetchAdmin();
 }

@@ -1,23 +1,15 @@
 package com.flipkart.business;
-import com.flipkart.DAO.AdminDaoInterface;
-import com.flipkart.DAO.AdminDaoOperation;
-import com.flipkart.DAO.ProfessorDaoInterface;
-import com.flipkart.DAO.ProfessorDaoOperation;
+
+import com.flipkart.DAO.*;
 import com.flipkart.bean.Admin;
 import com.flipkart.bean.Professor;
+
+import java.util.List;
+
 public class AdminOperation implements AdminInterface{
-    //  @Override
-    //  public Student fetchStudent(String userName) {
-    //      return dataAccess.getStudent(userName);
-    //  }
-    //   @Override
-    //   public Admin fetchAdmin(String userName) {
-    //       return dataAccess.getAdmin(userName);
-//    }
-    // @Override
-    // public Professor fetchProfessor(String userName) {
-    //     return dataAccess.getProfessor(userName);
-    // }
+
+    AdminDaoInterface newAdmin=new AdminDaoOperation();
+
     @Override
     public void createProfessor(Professor professor) {
         ProfessorDaoInterface newProfessor = new ProfessorDaoOperation();
@@ -25,7 +17,7 @@ public class AdminOperation implements AdminInterface{
     }
     @Override
     public void createAdmin(Admin admin) {
-        AdminDaoInterface newAdmin=new AdminDaoOperation();
+
         newAdmin.createAdmin(admin);
     }
     @Override
@@ -38,9 +30,29 @@ public class AdminOperation implements AdminInterface{
         ProfessorDaoInterface newProfessor = new ProfessorDaoOperation();
         newProfessor.displayProfessors();
     }
+
+    @Override
+    public Admin fetchAdmin(int userId) {
+        Admin admin = new Admin();
+        admin.setName("RandAdmin");
+        return admin;
+//        return newAdmin.fetchAdmin();
+    }
+
     @Override
     public void displayAdmins() {
         AdminDaoInterface newAdmin=new AdminDaoOperation();
         newAdmin.displayAdmins();
+    }
+
+    @Override
+    public void showunapprovedStudents(){
+        StudentDaoInterface studentDao=new StudentDaoOperation();
+        studentDao.getUnapproved();
+    }
+    @Override
+    public void approveStudent(List<Integer> students){
+        StudentDaoInterface studentDao=new StudentDaoOperation();
+        studentDao.approveStudent(students);
     }
 }

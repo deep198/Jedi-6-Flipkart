@@ -13,6 +13,15 @@ public class SQLQueries {
     public static final String DISPLAY_ADMIN = "SELECT * FROM CRS.admin";
     public static final String INSERT_PROF = "INSERT INTO CRS.professor (name, department) VALUES (?,?)";
     public static final String DISPLAY_PROF = "SELECT * FROM CRS.professor";
-
+    public static final String DISPLAY_COURSES= "SELECT * FROM CRS.course WHERE sem = ? AND branch =?";
+    public static final String INSERT_COURSE="INSERT INTO CRS.course VALUES (?,?,?,?)";
+    public static final String DELETE_COURSE="DELETE FROM CRS.course WHERE courseId = " ;
+    public static final String DISPLAY_COURSES_PROFESSOR= "SELECT * FROM CRS.course WHERE professorId=NULL" ;
+    //public static final String SELECT_COURSE="UPDATE course SET ProfessorID = ? WHERE CourseID=? ";
+    public static final String DELETE_PROFESSOR_COURSE="UPDATE CRS.course SET pofessorId = NULL WHERE professorId = ? AND courseId=?";
+    public static final String DISPLAY_UNAPPROVED = "SELECT * FROM CRS.student WHERE isApproved=FALSE";
+    public static final String APPROVE_STUD = "UPDATE CRS.student SET isApproved=TRUE where studentId=?";
+    public static final String VIEW_GRADES = "SELECT * FROM CRS.registered_course where studentId = ?";
+    public static final String UPLOAD_GRADES = "UPDATE CRS.registered_course SET marks = ? AND grade = ? WHERE studentId = ? AND courseId = ?";
 
 }

@@ -1,12 +1,10 @@
 package com.flipkart.client;
 
-import com.flipkart.DAO.TemporaryDataStore;
 import com.flipkart.bean.Admin;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
-import com.flipkart.business.UserInterface;
-import com.flipkart.business.UserOperation;
+import com.flipkart.business.*;
 import com.flipkart.exception.InvalidLoginException;
 
 import java.util.Scanner;
@@ -18,45 +16,13 @@ public class UserClient {
         //initializing the scanner
         Scanner sc = new Scanner(System.in);
 
-        // initializing the instance courseOperation to carry out user operations
         UserInterface userOperation = new UserOperation();
+        StudentInterface studentOperation = new StudentOperation();
+        ProfessorInterface professorOperation = new ProfessorOperation();
+        AdminInterface adminOperation = new AdminOperation();
+
 
         //user login landing page
-        //Adding dummy objects for testing
-        TemporaryDataStore temporaryDataStore = new TemporaryDataStore();
-
-        Professor professor = new Professor();
-        professor.setUserName("prof");
-        professor.setProfessorId(201);
-        professor.setDepartment("EEE");
-        professor.setPassword("pass");
-        professor.setName("Random Prof");
-        temporaryDataStore.addProfessor(professor);
-
-        Professor professor2 = new Professor();
-        professor2.setUserName("prof2");
-        professor2.setProfessorId(202);
-        professor2.setDepartment("EEE");
-        professor2.setPassword("pass");
-        professor2.setName("Random Prof2");
-        temporaryDataStore.addProfessor(professor2);
-
-        Admin admin = new Admin();
-
-        admin.setUserName("admin");
-        admin.setName("Random Admin");
-        admin.setPassword("pass");
-        admin.setAdminId(101);
-
-        Admin admin2 = new Admin();
-
-        admin2.setUserName("admin2");
-        admin2.setName("Random Admin2");
-        admin2.setPassword("pass");
-        admin2.setAdminId(102);
-
-        temporaryDataStore.addAdmin(admin);
-        temporaryDataStore.addAdmin(admin2);
 
         while(true) {
             System.out.println("**WELCOME TO COURSE REGISTRATION SYSTEM****");
@@ -76,14 +42,14 @@ public class UserClient {
 
                 case 1:
                     // fetching input for user credentials
-                    System.out.println("Enter UserName: ");
-                    String username= sc.next();
+                    System.out.println("Enter UserId: ");
+                    int userId = sc.nextInt();
                     System.out.println("Enter password: ");
                     String password= sc.next();
                     try{
 
                         // validating the user credentials
-                        User checkedUser = userOperation.validateLogin(username, password);
+                        User checkedUser = userOperation.validateLogin(userId, password);
                         String userRole = checkedUser.getUserRole();
                         String userName = checkedUser.getUserName();
 
@@ -91,7 +57,7 @@ public class UserClient {
                             // if user is a student
                             case "STUDENT":
                                 // fetching student object from student table
-                                Student student = userOperation.fetchStudent(userName);
+                                Student student = studentOperation.fetchStudent(userName);
                                 StudentClient studentClient = new StudentClient();
                                 // redirecting to student client landing page
                                 studentClient.studentClientPage(student);
@@ -100,7 +66,7 @@ public class UserClient {
                                 //if user is a professor
                             case "PROFESSOR":
                                 //fetching professor object from professor table
-                                professor = userOperation.fetchProfessor(userName);
+                                Professor professor = professorOperation.fetchProfessor(userName);
                                 ProfessorClient professorClient= new ProfessorClient();
                                 //redirecting to professor client landing page
                                 professorClient.professorClientPage(professor);
@@ -109,7 +75,7 @@ public class UserClient {
                                 //if user is an admin
                             case "ADMIN":
                                 // fetching admin object from admin table
-                                admin = userOperation.fetchAdmin(userName);
+                                Admin admin = adminOperation.fetchAdmin(userId);
                                 AdminClient adminClient= new AdminClient();
                                 // redirecting to admin client landing page
                                 adminClient.adminClientPage(admin);
@@ -130,39 +96,33 @@ public class UserClient {
                     System.out.println("Enter your details : ");
                     System.out.println();
                     Student student = new Student();
-                    System.out.println("Enter your Username : ");
-                    username = sc.next();
-                    student.setUserName(username);
                     sc.nextLine();
-                    System.out.println("Enter your Password : ");
-                    password = sc.next();
-                    student.setPassword(password);
                     sc.nextLine();
                     System.out.println("Enter your name : ");
                     String name=sc.nextLine();
                     student.setName(name);
+                    sc.nextLine();
+                    System.out.println("Enter your UserName : ");
+                    String userName = sc.nextLine();
+                    student.setUserName(userName);
+                    System.out.println("Enter your Password : ");
+                    password = sc.next();
+                    student.setPassword(password);
                     System.out.println("Enter your Branch : ");
                     String branch = sc.next();
                     student.setDepartment(branch);
                     sc.nextLine();
-
                     System.out.println();
-
                     System.out.println(" Registering New Student to the System ...");
-
                     System.out.println();
                     userOperation.createStudent(student);
-
                     System.out.println("**New Student Created****");
-
-                    System.out.println(name+" "+branch+" " +"\n");
-
                     break;
 
                 //update password
                 case 3:
-                    System.out.println("Enter Username: ");
-                    username = sc.next();
+                    System.out.println("Enter userId: ");
+                    userId = sc.nextInt();
                     sc.nextLine();
                     System.out.println("Enter Old Password: ");
                     String oldPswd = sc.next();
@@ -171,7 +131,7 @@ public class UserClient {
                     String newPswd = sc.next();
                     sc.nextLine();
 
-                    userOperation.updatePassword(username, oldPswd, newPswd);
+                    userOperation.updatePassword(userId, oldPswd, newPswd);
             }
 
             if(option==1)

@@ -1,5 +1,6 @@
 package com.flipkart.DAO;
 
+import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.helper.DBConnectionHelper;
@@ -39,6 +40,17 @@ public class UserDaoOperation implements UserDaoInterface{
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @Override
+    public void updatePassword(int userId, String oldPswd, String newPswd) {
+
+    }
+
+    @Override
+    public void createStudent(Student student) {
+
+
     }
 
     @Override

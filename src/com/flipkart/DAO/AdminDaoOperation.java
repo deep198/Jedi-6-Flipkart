@@ -11,11 +11,11 @@ import static com.flipkart.constant.SQLQueries.DISPLAY_ADMIN;
 public class AdminDaoOperation implements AdminDaoInterface {
 
     @Override
-    public void createAdmin(Admin admin){
+    public void createAdmin(Admin admin) {
 
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
-        PreparedStatement stmt= null;
+        PreparedStatement stmt = null;
 
         try {
             //Declaring prepared statement and executing query
@@ -34,7 +34,7 @@ public class AdminDaoOperation implements AdminDaoInterface {
     }
 
     @Override
-    public void displayAdmins(){
+    public void displayAdmins() {
 
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -47,13 +47,38 @@ public class AdminDaoOperation implements AdminDaoInterface {
             ResultSet rs = stmt.executeQuery(DISPLAY_ADMIN);
 
             // iterate through the java resultset
-            while (rs.next())
-            {
+            while (rs.next()) {
                 String name = rs.getString("adminName");
-                System.out.println("Name : "+name);
+                System.out.println("Name : " + name);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @Override
+    public Admin fetchAdmin() {
+        return null;
+
+//        Connection connection = DBConnectionHelper.getConnection();
+//
+//        try {
+//            //Declaring prepared statement and executing query
+//            Statement stmt = connection.createStatement();
+//
+//            //Retrieving data
+////            ResultSet rs = stmt.executeQuery(FETCH_ADMIN);
+//
+//            // iterate through the java resultset
+//            while (rs.next()) {
+//                String name = rs.getString("adminName");
+//                System.out.println("Name : " + name);
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//
+//
+//    }
     }
 }
