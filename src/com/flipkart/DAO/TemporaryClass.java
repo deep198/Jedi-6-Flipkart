@@ -25,6 +25,24 @@ public class TemporaryClass {
 //                System.out.println(checkedUserTst.getUserName());
 
 
+//                Admin admin = new Admin();
+//                admin.setName("Admin6");
+//                AdminDaoInterface adminDao = new AdminDaoOperation();
+//                adminDao.createAdmin(admin);
+//                adminDao.displayAdmins();
+//
+//                Professor professor = new Professor();
+//                professor.setName("Prof23");
+//                professor.setDepartment("ECE");
+//                Professor professor2 = new Professor();
+//                professor2.setName("Prof123");
+//                professor2.setDepartment("ECE");
+//                ProfessorDaoInterface professorDao = new ProfessorDaoOperation();
+//                professorDao.createProfessor(professor2);
+//                professorDao.createProfessor(professor);
+//                professorDao.displayProfessors();
+
+
 
 
         }

@@ -81,10 +81,10 @@ public class UserDaoOperation implements UserDaoInterface{
             String password= user.getPassword();
             String roleName = user.getUserRole();
 
-            stmt.setInt(4, userId);
             stmt.setString(1, userName);
             stmt.setString(2, password);
             stmt.setString(3, roleName);
+            stmt.setInt(4, userId);
 
             //Executing query
             stmt.executeUpdate();
@@ -92,7 +92,5 @@ public class UserDaoOperation implements UserDaoInterface{
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
     }
-
 }

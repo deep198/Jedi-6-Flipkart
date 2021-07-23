@@ -9,6 +9,10 @@ public class SQLQueries {
     public static final String DROP_COURSE="DELETE FROM CRS.registered_course WHERE studentId=? AND courseId=?";
     public static final String VIEW_SELECTED_COURSES="SELECT CRS.course.courseId, CRS.course.courseName\r\n" +
 					"FROM CRS.course \r\n" + "INNER JOIN CRS.registered_course \r\n" + "ON CRS.registered_course.courseId = CRS.course.courseId\r\n" + "WHERE CRS.registered_course.studentId= ?";
+    public static final String INSERT_ADMIN = "INSERT INTO CRS.admin (adminName) VALUES (?)";
+    public static final String DISPLAY_ADMIN = "SELECT * FROM CRS.admin";
+    public static final String INSERT_PROF = "INSERT INTO CRS.professor (name, department) VALUES (?,?)";
+    public static final String DISPLAY_PROF = "SELECT * FROM CRS.professor";
 
 
 }
