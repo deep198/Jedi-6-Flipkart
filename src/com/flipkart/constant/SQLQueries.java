@@ -2,7 +2,7 @@ package com.flipkart.constant;
 
 public class SQLQueries {
     public static final String INSERT_USER = "INSERT INTO CRS.user VALUES (?,?,?,?)";
-    public static final String VALIDATE_USER="SELECT userName, userRole FROM CRS.user WHERE userId=? AND password=?";
+    public static final String VALIDATE_USER="SELECT * FROM CRS.user WHERE userId=? AND password=?";
     public static final String UPDATE_USER="UPDATE CRS.user SET username=?,password=?, userRole=? WHERE userId=?";
     public static final String ADD_COURSE="INSERT INTO CRS.registered_course VALUES (?,?,?)";
     public static final String DROP_COURSE="DELETE FROM CRS.registered_course WHERE studentId=? AND courseId=?";
@@ -12,7 +12,7 @@ public class SQLQueries {
     public static final String DISPLAY_ADMIN = "SELECT * FROM CRS.admin";
     public static final String INSERT_PROF = "INSERT INTO CRS.professor (name, department) VALUES (?,?)";
     public static final String DISPLAY_PROF = "SELECT * FROM CRS.professor";
-    public static final String DISPLAY_COURSES= "SELECT * FROM CRS.course WHERE sem = ? AND branch =?";
+    public static final String DISPLAY_COURSES= "SELECT * FROM CRS.course WHERE sem = ? AND department =?";
     public static final String INSERT_COURSE="INSERT INTO CRS.course VALUES (?,?,?,?,?,?,?)";
     public static final String DELETE_COURSE="DELETE FROM CRS.course WHERE courseId = " ;
     public static final String DISPLAY_COURSES_PROFESSOR= "SELECT * FROM CRS.course WHERE professorId=-1" ;

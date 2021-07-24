@@ -53,6 +53,7 @@ public class UserClient {
                         String userRole = checkedUser.getUserRole();
                         String userName = checkedUser.getUserName();
                         userId = checkedUser.getUserId();
+                        System.out.println(checkedUser.getUserName() + " " + checkedUser.getUserId());
 
                         switch(userRole) {
                             // if user is a student

@@ -1,8 +1,8 @@
 package com.flipkart.DAO;
 
-import com.flipkart.bean.Course;
-
-import java.util.List;
+import com.flipkart.bean.Professor;
+import com.flipkart.business.AdminInterface;
+import com.flipkart.business.AdminOperation;
 
 public class TemporaryClass {
 
@@ -35,9 +35,13 @@ public class TemporaryClass {
 //                adminDao.createAdmin(admin);
 //                adminDao.displayAdmins();
 //
-//                Professor professor = new Professor();
-//                professor.setName("Prof23");
-//                professor.setDepartment("ECE");
+                Professor professor = new Professor();
+                professor.setName("Prhbjknihof23");
+                professor.setDepartment("ECE");
+                professor.setPassword("pass");
+                professor.setUserName("user2wefadsae");
+                AdminInterface adminInterface = new AdminOperation();
+                adminInterface.createProfessor(professor);
 //                Professor professor2 = new Professor();
 //                professor2.setName("Prof123");
 //                professor2.setDepartment("ECE");
@@ -66,12 +70,14 @@ public class TemporaryClass {
 //                course.setSem(1);
 //                course.setCredits(3);
 //                coureDAO.insertCourse(course);
-                List<Course> course = coureDAO.displayCoursesProfessor();
-                for (Course course1 : course) {
-                        System.out.println(course1.getCourseId() + "   " +  course1.getCourseName());
-                }
+//                List<Course> course = coureDAO.displayCoursesProfessor();
+//                for (Course course1 : course) {
+//                        System.out.println(course1.getCourseId() + "   " +  course1.getCourseName());
+//                }
+//
+//                coureDAO.deleteProfessorCourse(101, 101);
 
-                coureDAO.deleteProfessorCourse(101, 101);
+
 
         }
 

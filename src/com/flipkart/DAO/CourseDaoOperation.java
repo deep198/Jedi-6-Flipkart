@@ -36,7 +36,7 @@ public class CourseDaoOperation implements CourseDaoInterface {
                 course.setCourseId(rs.getInt("courseId"));
                 course.setCourseName(rs.getString("courseName"));
                 course.setCredits(rs.getInt("credits"));
-                course.setProfessorId(rs.getInt("pofessorId"));
+                course.setProfessorId(rs.getInt("professorId"));
                 list.add(course);
             }
             return list;

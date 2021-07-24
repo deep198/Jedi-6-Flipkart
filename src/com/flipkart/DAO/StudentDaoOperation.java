@@ -157,6 +157,7 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
             //Retrieving data
             ResultSet rs = stmt.executeQuery();
             // iterate through the java resultset
+            rs.next();
             String name = rs.getString("name");
             student.setName(name);
             String department = rs.getString("department");

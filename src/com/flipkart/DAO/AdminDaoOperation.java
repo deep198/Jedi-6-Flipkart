@@ -70,7 +70,7 @@ public class AdminDaoOperation implements AdminDaoInterface {
                 ResultSet rs = stmt.executeQuery();
                 rs.next();
                 // iterate through the java resultset
-                String name = rs.getString("name");
+                String name = rs.getString("adminName");
                 admin.setName(name);
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());

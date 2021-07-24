@@ -70,6 +70,7 @@ public class UserDaoOperation implements UserDaoInterface{
                 User checkeduser = new User();
                 checkeduser.setUserName( rs.getString("userName") );
                 checkeduser.setUserRole(rs.getString("userRole"));
+                checkeduser.setUserId(rs.getInt("userId"));
 
                 return checkeduser;
             }

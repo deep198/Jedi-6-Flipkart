@@ -3,8 +3,11 @@ package com.flipkart.business;
 import com.flipkart.DAO.*;
 import com.flipkart.bean.Admin;
 import com.flipkart.bean.Professor;
+import com.flipkart.bean.User;
 
 import java.util.List;
+
+import static com.flipkart.constant.UserRole.PROFESSOR;
 
 public class AdminOperation implements AdminInterface{
 
@@ -13,7 +16,13 @@ public class AdminOperation implements AdminInterface{
     @Override
     public void createProfessor(Professor professor) {
         ProfessorDaoInterface newProfessor = new ProfessorDaoOperation();
-        newProfessor.createProfessor(professor);
+        int userId = newProfessor.createProfessor(professor);
+        UserDaoInterface userDaoOperation = new UserDaoOperation();
+        User user = new User();
+        user.setUserId(userId);
+        user.setPassword(professor.getPassword());
+        user.setUserRole(PROFESSOR);
+        userDaoOperation.createUser(user);
     }
     @Override
     public void createAdmin(Admin admin) {
