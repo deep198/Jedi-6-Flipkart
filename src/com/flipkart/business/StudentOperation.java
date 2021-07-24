@@ -1,5 +1,7 @@
 package com.flipkart.business;
 
+import com.flipkart.DAO.StudentDaoInterface;
+import com.flipkart.DAO.StudentDaoOperation;
 import com.flipkart.bean.Student;
 
 public class StudentOperation implements StudentInterface{
@@ -29,7 +31,9 @@ public class StudentOperation implements StudentInterface{
     }
 
     @Override
-    public Student fetchStudent(String userName) {
-        return null;
+    public Student fetchStudent(int userID){
+        StudentDaoInterface studentDao= new StudentDaoOperation();
+        Student student=studentDao.fetchStudent(userID);
+        return student;
     }
 }

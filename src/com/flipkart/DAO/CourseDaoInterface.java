@@ -12,5 +12,6 @@ public interface CourseDaoInterface {
     public void deleteCourse(int courseId) throws CourseNotFoundException;
     public List<Course> displayCoursesProfessor();
     public void deleteProfessorCourse(int courseId, int ProfessorID);
+    public void selectCourse(int courseId, int professorId);
 
 }

@@ -13,4 +13,8 @@ public interface StudentDaoInterface {
     public List<Grade> viewGrades(Student student);
     public void getUnapproved();
     public void approveStudent(List<Integer> students);
+
+    Student fetchStudent(int userId);
+
+    void displayStudents();
 }

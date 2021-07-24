@@ -9,6 +9,15 @@ public class Student extends User {
     private int sem;
     private List<RegisteredCourse> registeredCourses;
     private boolean paymentStatus;
+    private boolean isApproved;
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
 
     public int getStudentId() {
         return studentId;

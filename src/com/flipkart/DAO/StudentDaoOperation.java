@@ -1,17 +1,15 @@
 package com.flipkart.DAO;
-
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 import com.flipkart.constant.Grade;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.helper.CloseConnection;
 import com.flipkart.helper.DBConnectionHelper;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.flipkart.constant.SQLQueries.DISPLAY_UNAPPROVED;
+import static com.flipkart.constant.SQLQueries.*;
 
 public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
     // add a course by student
@@ -53,17 +51,14 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         System.out.println("Course not found !");
     }
-
     @Override
     public List<Course> viewCourses(Student student) {
         return null;
     }
-
     @Override
     public List<Grade> viewGrades(Student student) {
         return null;
     }
-
     // display list of courses selected by student
     public List<Course> displayRegisteredCourses(Student student) {
         Connection connection= DBConnectionHelper.getConnection();
@@ -87,7 +82,6 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         return null;
     }
-
     public void getUnapproved(){
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -125,6 +119,58 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
             }
         }
     }
+    @Override
+    public void displayStudents() {
+        Connection connection = DBConnectionHelper.getConnection();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(DISPLAY_STUDENT);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                System.out.println("Student Name : " + name);
+                String dept=rs.getString("department");
+                System.out.println("Department : "+dept);
+                int studentId = rs.getInt("studentId");
+                System.out.println("Student ID : "+studentId);
+                int sem = rs.getInt("sem");
+                System.out.println("Semester : "+sem);
+                int paymentStatus = rs.getInt("paymentStatus");
+                System.out.println("Payment Status : "+paymentStatus);
+                int isApproved = rs.getInt("isApproved");
+                System.out.println("Approved Status : "+isApproved);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
+    public Student fetchStudent(int UserID){
+        //Establishing the connection
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt= null;
+        Student student = new Student();
+        student.setStudentId(UserID);
+        try {
+            //Declaring prepared statement and executing query
+            stmt = connection.prepareStatement(SQLQueries.FETCH_STUDENT);
+            stmt.setInt(1, UserID);
+            //Retrieving data
+            ResultSet rs = stmt.executeQuery();
+            // iterate through the java resultset
+            String name = rs.getString("name");
+            student.setName(name);
+            String department = rs.getString("department");
+            student.setDepartment(department);
+            int sem = rs.getInt("sem");
+            student.setSem(sem);
+            boolean paymentStatus=rs.getBoolean("paymentStatus");
+            student.setPaymentStatus(paymentStatus);
+            boolean isApproved=rs.getBoolean("isApproved");
+            student.setApproved(isApproved);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return student;
+    }
 
 }

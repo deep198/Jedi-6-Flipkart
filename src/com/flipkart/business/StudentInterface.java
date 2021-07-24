@@ -11,5 +11,6 @@ public interface StudentInterface {
 
     void viewGrades(Student student);
 
-    Student fetchStudent(String userName);
+    Student fetchStudent(int userId);
+
 }

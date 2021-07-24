@@ -1,6 +1,7 @@
 package com.flipkart.DAO;
 
-import java.util.ArrayList;
+import com.flipkart.bean.Course;
+
 import java.util.List;
 
 public class TemporaryClass {
@@ -45,14 +46,32 @@ public class TemporaryClass {
 //                professorDao.createProfessor(professor);
 //                professorDao.displayProfessors();
 
-                StudentDaoInterface studentDaoInterface = new StudentDaoOperation();
-                List<Integer> students = new ArrayList<>();
-                students.add(1003);
-                students.add(1004);
-                studentDaoInterface.approveStudent(students);
+//                StudentDaoInterface studentDaoInterface = new StudentDaoOperation();
+//                List<Integer> students = new ArrayList<>();
+//                students.add(1003);
+//                students.add(1004);
+//                studentDaoInterface.approveStudent(students);
 
+//                Professor professor = new Professor();
+//                professor.setName("Prof1213");
+//                professor.setDepartment("ECE");
+//                ProfessorDaoInterface professorDaoInterface = new ProfessorDaoOperation();
+//                System.out.println("Prof Id" + professorDaoInterface.createProfessor(professor));
 
+                CourseDaoInterface coureDAO = new CourseDaoOperation();
+//                Course course = new Course();
+//                course.setCourseId(101);
+//                course.setCourseName("C++");
+//                course.setDepartment("CSE");
+//                course.setSem(1);
+//                course.setCredits(3);
+//                coureDAO.insertCourse(course);
+                List<Course> course = coureDAO.displayCoursesProfessor();
+                for (Course course1 : course) {
+                        System.out.println(course1.getCourseId() + "   " +  course1.getCourseName());
+                }
 
+                coureDAO.deleteProfessorCourse(101, 101);
 
         }
 

@@ -7,5 +7,5 @@ public interface AdminDaoInterface {
 
     public void displayAdmins();
 
-    Admin fetchAdmin();
+    Admin fetchAdmin(int userID);
 }

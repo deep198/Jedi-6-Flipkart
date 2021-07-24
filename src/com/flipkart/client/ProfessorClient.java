@@ -1,17 +1,9 @@
 package com.flipkart.client;
 
-import java.util.Date;
-import java.util.Scanner;
-
 import com.flipkart.bean.Professor;
-import com.flipkart.business.CourseInterface;
-import com.flipkart.business.CourseOperation;
-import com.flipkart.business.GradeInterface;
-import com.flipkart.business.GradeOperation;
-import com.flipkart.business.ProfessorInterface;
-import com.flipkart.business.ProfessorOperation;
-import com.flipkart.business.RegistrationInterface;
-import com.flipkart.business.RegistrationOperation;
+import com.flipkart.business.*;
+
+import java.util.Scanner;
 
 public class ProfessorClient {
 
@@ -54,8 +46,6 @@ public class ProfessorClient {
                     courseId= sc.nextInt();
                     professorOperation.selectCourse(courseId, professor);
                     continue;
-
-
                     // display list of courses selected by professor to teach
                 case 3:
                     professorOperation.displaySelectedCoursesProfessor(professor);
@@ -76,12 +66,10 @@ public class ProfessorClient {
                     GradeInterface gradeOperation= new GradeOperation();
                     gradeOperation.uploadGrades(studentId, courseId, grade);
                     continue;
-
                     // log out as a professor
                 case 5:
                     System.out.println("Successfully logged out as on ");
                     break;
-
             }
             break;
 

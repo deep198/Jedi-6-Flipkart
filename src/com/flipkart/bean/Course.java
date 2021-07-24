@@ -8,6 +8,15 @@ public class Course {
     private int professorId;
     private int sem;
     private int studentsEnrolled;
+    private int credits;
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
 
     public int getSem() {
         return sem;

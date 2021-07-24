@@ -52,12 +52,13 @@ public class UserClient {
                         User checkedUser = userOperation.validateLogin(userId, password);
                         String userRole = checkedUser.getUserRole();
                         String userName = checkedUser.getUserName();
+                        userId = checkedUser.getUserId();
 
                         switch(userRole) {
                             // if user is a student
                             case "STUDENT":
                                 // fetching student object from student table
-                                Student student = studentOperation.fetchStudent(userName);
+                                Student student = studentOperation.fetchStudent(userId);
                                 StudentClient studentClient = new StudentClient();
                                 // redirecting to student client landing page
                                 studentClient.studentClientPage(student);
@@ -66,7 +67,7 @@ public class UserClient {
                                 //if user is a professor
                             case "PROFESSOR":
                                 //fetching professor object from professor table
-                                Professor professor = professorOperation.fetchProfessor(userName);
+                                Professor professor = professorOperation.fetchProfessor(userId);
                                 ProfessorClient professorClient= new ProfessorClient();
                                 //redirecting to professor client landing page
                                 professorClient.professorClientPage(professor);

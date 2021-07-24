@@ -11,4 +11,9 @@ public interface CourseInterface {
     
     void addCourse(Course course);
 
-    public void deleteCourse(int courseId)throws CourseNotFoundException;}
+    public void deleteCourse(int courseId)throws CourseNotFoundException;
+
+    void deleteprofcourse(int courseId, int professorId);
+
+    void selectprofcourse(int courseID, int professorId);
+}

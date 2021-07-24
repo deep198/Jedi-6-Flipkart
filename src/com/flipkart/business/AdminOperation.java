@@ -31,12 +31,11 @@ public class AdminOperation implements AdminInterface{
         newProfessor.displayProfessors();
     }
 
-    @Override
-    public Admin fetchAdmin(int userId) {
-        Admin admin = new Admin();
-        admin.setName("RandAdmin");
+
+    public Admin fetchAdmin(int userID){
+        AdminDaoInterface adminDao= new AdminDaoOperation();
+        Admin admin=adminDao.fetchAdmin(userID);
         return admin;
-//        return newAdmin.fetchAdmin();
     }
 
     @Override

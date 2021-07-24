@@ -57,28 +57,24 @@ public class AdminDaoOperation implements AdminDaoInterface {
     }
 
     @Override
-    public Admin fetchAdmin() {
-        return null;
-
-//        Connection connection = DBConnectionHelper.getConnection();
-//
-//        try {
-//            //Declaring prepared statement and executing query
-//            Statement stmt = connection.createStatement();
-//
-//            //Retrieving data
-////            ResultSet rs = stmt.executeQuery(FETCH_ADMIN);
-//
-//            // iterate through the java resultset
-//            while (rs.next()) {
-//                String name = rs.getString("adminName");
-//                System.out.println("Name : " + name);
-//            }
-//        } catch (SQLException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//
-//
-//    }
+    public Admin fetchAdmin(int userID) {
+           Connection connection = DBConnectionHelper.getConnection();
+            PreparedStatement stmt= null;
+            Admin admin = new Admin();
+            admin.setAdminId(userID);
+            try {
+                //Declaring prepared statement and executing query
+                stmt = connection.prepareStatement(SQLQueries.FETCH_ADMIN);
+                stmt.setInt(1, userID);
+                //Retrieving data
+                ResultSet rs = stmt.executeQuery();
+                rs.next();
+                // iterate through the java resultset
+                String name = rs.getString("name");
+                admin.setName(name);
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            return admin;
+        }
     }
-}
