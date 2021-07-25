@@ -40,6 +40,7 @@ public class ProfessorOperation implements ProfessorInterface{
     }
     public void deleteProfessorCourse(int courseId,Professor prof)
     {
+        System.out.println("Entered deleteprofcourse in professoroperation");
         CourseInterface newCourse1=new CourseOperation();
         newCourse1.deleteprofcourse(courseId , prof.getProfessorId());
     }

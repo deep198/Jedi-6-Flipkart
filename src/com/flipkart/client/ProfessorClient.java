@@ -47,6 +47,7 @@ public class ProfessorClient {
                     System.out.println("Enter CourseID of the course to be deselected");
                     courseId= sc.nextInt();
                     professorOperation.deleteProfessorCourse(courseId,professor);
+                    continue;
                     // display list of courses selected by professor to teach
                 case 4:
                     professorOperation.displaySelectedCoursesProfessor(professor);

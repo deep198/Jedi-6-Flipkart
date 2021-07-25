@@ -1,4 +1,7 @@
 package com.flipkart.client;
+
+import com.flipkart.DAO.RegisteredCourseDaoInterface;
+import com.flipkart.DAO.RegisteredCourseDaoOperation;
 import com.flipkart.bean.Student;
 import com.flipkart.business.*;
 
@@ -102,10 +105,14 @@ public class StudentClient {
                     }
 
                     // if number of courses selected by students is <4 or >4
-                    int numberOfSelectedCourses = student.getRegisteredCourses().size();
-				if(numberOfSelectedCourses<4||numberOfSelectedCourses>4) {
-                    System.out.println("Please select EXACTLY 4 courses !");
-                }
+
+                    RegisteredCourseDaoInterface registeredCourseDao= new RegisteredCourseDaoOperation();
+                    int numberOfSelectedCourses = registeredCourseDao.displayGradeCard(student).size();
+                    if(numberOfSelectedCourses<4||numberOfSelectedCourses>4) {
+                        System.out.println("Please select EXACTLY 4 courses !");
+                        System.out.println("Currently you have selected " + numberOfSelectedCourses + " courses!!");
+
+                    }
 
                 // if number of courses selected is exactly 4 and  courses are available
                 else {
@@ -172,6 +179,7 @@ public class StudentClient {
                                     System.out.println("1. Show Registration Reciept");
                                     System.out.println("2. Back to main menu");
                                     int option3= sc.nextInt();
+                                    boolean goToMainMenu = false;
                                     switch(option3){
                                         // fetching and displaying registration
                                         case 1:
@@ -180,8 +188,10 @@ public class StudentClient {
                                             break;
 
                                         case 2:
+                                            goToMainMenu = true;
                                             break;
                                     }
+
                                     break;
                                 case 2:
                                     break;

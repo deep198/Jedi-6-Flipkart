@@ -18,4 +18,6 @@ public interface CourseDaoInterface {
     public void selectCourse(int courseId, int professorId);
 
     void incrementEnrolledStudents(int courseId);
+
+    void decrementEnrolledStudents(int courseId);
 }

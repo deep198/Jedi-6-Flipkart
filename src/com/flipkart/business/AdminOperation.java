@@ -7,6 +7,7 @@ import com.flipkart.bean.User;
 
 import java.util.List;
 
+import static com.flipkart.constant.UserRole.ADMIN;
 import static com.flipkart.constant.UserRole.PROFESSOR;
 
 public class AdminOperation implements AdminInterface{
@@ -14,7 +15,7 @@ public class AdminOperation implements AdminInterface{
     AdminDaoInterface newAdmin=new AdminDaoOperation();
 
     @Override
-    public void createProfessor(Professor professor) {
+    public int createProfessor(Professor professor) {
         ProfessorDaoInterface newProfessor = new ProfessorDaoOperation();
         int userId = newProfessor.createProfessor(professor);
         UserDaoInterface userDaoOperation = new UserDaoOperation();
@@ -23,12 +24,19 @@ public class AdminOperation implements AdminInterface{
         user.setPassword(professor.getPassword());
         user.setUserRole(PROFESSOR);
         userDaoOperation.createUser(user);
+        return userId;
     }
     @Override
-    public void createAdmin(Admin admin) {
-
-        newAdmin.createAdmin(admin);
+    public int createAdmin(Admin admin) {
+        int userId = newAdmin.createAdmin(admin);
+        User user = new User();
+        user.setUserName(admin.getUserName());
+        user.setUserRole(ADMIN);
+        user.setUserId(admin.getUserId());
+        user.setPassword(admin.getPassword());
+        return userId;
     }
+
     @Override
     public void displayStudents() {
         StudentDaoInterface studentDaoOperation = new StudentDaoOperation();

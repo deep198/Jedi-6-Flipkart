@@ -6,5 +6,7 @@ import java.util.List;
 public interface RegisteredCourseDaoInterface {
     public List<RegisteredCourse> displayGradeCard(Student student);
     void uploadGrades(int studentId, int courseId, String grade, int marks);
-    void registerCourseForStudent(int studentId, int courseId);
+    void registerCourseForStudent(int studentId, int courseId, int sem);
+
+    void dropCourseForStudent(int studentId, int courseId, int sem);
 }

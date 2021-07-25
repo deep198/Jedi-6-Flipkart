@@ -8,6 +8,8 @@ import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.exception.InvalidLoginException;
 
+import static com.flipkart.constant.UserRole.STUDENT;
+
 public class UserOperation implements UserInterface{
 
     UserDaoInterface userDaoOperation = new UserDaoOperation();
@@ -17,6 +19,7 @@ public class UserOperation implements UserInterface{
     @Override
     public User validateLogin(int userId, String password) throws InvalidLoginException {
         return userDaoOperation.validateUser(userId, password);
+
     }
 
     @Override
@@ -26,13 +29,21 @@ public class UserOperation implements UserInterface{
 
     @Override
     public int createStudent(Student student) {
-        return studentDaoOperation.createStudent(student);
 
+        int studentId = studentDaoOperation.createStudent(student);
+        User user = new User();
+        user.setUserId(studentId);
+        user.setUserName(student.getUserName());
+        user.setPassword(student.getPassword());
+        user.setUserRole(STUDENT);
+        UserDaoInterface userDaoOperation = new UserDaoOperation();
+        userDaoOperation.createUser(user);
+        return studentId;
     }
+
 
     @Override
     public void updatePassword(int userId, String oldPswd, String newPswd) {
         userDaoOperation.updatePassword(userId, oldPswd, newPswd);
-
     }
 }

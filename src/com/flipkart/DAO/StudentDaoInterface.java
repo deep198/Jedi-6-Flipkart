@@ -16,4 +16,8 @@ public interface StudentDaoInterface {
     Student fetchStudent(int userId);
     void displayStudents();
     int createStudent(Student student);
+
+    boolean getPaymentStatus(int studentId);
+
+    void setPaymentStatus(int studentId);
 }

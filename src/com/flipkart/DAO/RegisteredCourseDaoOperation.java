@@ -55,10 +55,10 @@ public class RegisteredCourseDaoOperation implements RegisteredCourseDaoInterfac
         try {
             //Declaring prepared statement and executing query
             stmt = connection.prepareStatement(SQLQueries.UPLOAD_GRADES);
-            stmt.setInt(1, studentId);
-            stmt.setInt(2, courseId);
-            stmt.setString(3, grade);
-            stmt.setInt(4, marks);
+            stmt.setInt(3, studentId);
+            stmt.setInt(4, courseId);
+            stmt.setString(2, grade);
+            stmt.setInt(1, marks);
             //Executing query
             stmt.executeUpdate();
             System.out.println("Grade uploaded");
@@ -68,7 +68,7 @@ public class RegisteredCourseDaoOperation implements RegisteredCourseDaoInterfac
     }
 
     @Override
-    public void registerCourseForStudent(int studentId, int courseId) {
+    public void registerCourseForStudent(int studentId, int courseId, int sem) {
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt=null;
         try {
@@ -76,12 +76,30 @@ public class RegisteredCourseDaoOperation implements RegisteredCourseDaoInterfac
             stmt = connection.prepareStatement(SQLQueries.REGISTER_COURSE_FOR_STUDENT);
             stmt.setInt(1, studentId);
             stmt.setInt(2, courseId);
+            stmt.setInt(3, sem);
             //Executing query
             stmt.executeUpdate();
-            System.out.println("Grade uploaded");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @Override
+    public void dropCourseForStudent(int studentId, int courseId, int sem) {
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt=null;
+        try {
+            //Declaring prepared statement and executing query
+            stmt = connection.prepareStatement(SQLQueries.DROP_COURSE_FOR_STUDENT);
+            stmt.setInt(1, studentId);
+            stmt.setInt(2, courseId);
+            stmt.setInt(3, sem);
+            //Executing query
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
 
     }
 }

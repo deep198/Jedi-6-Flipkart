@@ -11,7 +11,7 @@ import static com.flipkart.constant.SQLQueries.DISPLAY_ADMIN;
 public class AdminDaoOperation implements AdminDaoInterface {
 
     @Override
-    public void createAdmin(Admin admin) {
+    public int createAdmin(Admin admin) {
 
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -28,9 +28,15 @@ public class AdminDaoOperation implements AdminDaoInterface {
 
             //Executing query
             stmt.executeUpdate();
+            Statement stmt2 = connection.createStatement();
+            ResultSet rs = stmt2.executeQuery(SQLQueries.GET_RECENT_ADMIN_ID);
+            rs.next();
+            return rs.getInt("maxAdminId");
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return 0;
     }
 
     @Override

@@ -41,38 +41,21 @@ public class AdminClient {
             switch(choice) {
                 // create a new user
                 case 1:
-                    user = new User();
-                    System.out.println("Enter UserName: ");
-                    String userName = sc.next();
-                    user.setUserName(userName);
-                    System.out.println("Enter Password: ");
-                    user.setPassword(sc.next());
                     System.out.println("Enter User Role ");
-                    System.out.println("1. Student");
-                    System.out.println("2. Professor");
-                    System.out.println("3. Admin");
+                    System.out.println("1. Professor");
+                    System.out.println("2. Admin");
+                    String userName;
                     userRoleOption = sc.nextInt();
                     switch(userRoleOption){
-                        //if user is a student
-                        case 1:
-                            user.setUserRole(STUDENT);
-                            userOperation.createUser(user);
-                            Student student = new Student();
-                            student.setUserName(userName);
-                            System.out.println("Enter Name");
-                            student.setName(sc.next());
-                            System.out.println("Enter Semester");
-                            student.setSem(sc.nextInt());
-                            System.out.println("Enter Department");
-                            student.setDepartment(sc.next());
-                            student.setPaymentStatus(false);
-                            // create student
-                            userOperation.createStudent(student);
-                            break;
                         // if user is a professor
-                        case 2:
+                        case 1:
+                            user = new User();
+                            System.out.println("Enter UserName: ");
+                            userName = sc.next();
+                            user.setUserName(userName);
+                            System.out.println("Enter Password: ");
+                            user.setPassword(sc.next());
                             user.setUserRole(PROFESSOR);
-                            userOperation.createUser(user);
                             Professor professor= new Professor();
                             professor.setUserName(userName);
                             System.out.println("Enter Name");
@@ -80,18 +63,24 @@ public class AdminClient {
                             System.out.println("Enter Department");
                             professor.setDepartment(sc.next());
                             // create professor
-                            adminOperation.createProfessor(professor);
+                            userId = adminOperation.createProfessor(professor);
+                            System.out.println("Professor created with UserId: " + userId);
                             break;
                         //if user is an admin
-                        case 3:
+                        case 2:
+                            user = new User();
+                            System.out.println("Enter UserName: ");
+                            userName = sc.next();
+                            user.setUserName(userName);
+                            System.out.println("Enter Password: ");
+                            user.setPassword(sc.next());
                             user.setUserRole(ADMIN);
-                            userOperation.createUser(user);
                             Admin newAdmin= new Admin();
                             newAdmin.setUserName(userName);
                             System.out.println("Enter Name");
                             newAdmin.setName(sc.next());
                             // create admin
-                            adminOperation.createAdmin(newAdmin);
+                            userId = adminOperation.createAdmin(newAdmin);
                             break;
                     }
                     continue;

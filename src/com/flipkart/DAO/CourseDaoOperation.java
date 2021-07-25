@@ -152,10 +152,11 @@ public class CourseDaoOperation implements CourseDaoInterface {
         Connection connection = DBConnectionHelper.getConnection();
         //Establishing the connection
         PreparedStatement stmt = null;
+        System.out.println("Entered deleteprofcourse in CourseDaoOperation");
         try {
             stmt = connection.prepareStatement(SQLQueries.DELETE_PROFESSOR_COURSE);
-            stmt.setInt(1, courseId);
-            stmt.setInt(2, ProfessorID);
+            stmt.setInt(1, ProfessorID);
+            stmt.setInt(2, courseId);
             //Executing query
             int rs = stmt.executeUpdate();
             if (rs > 0) {
@@ -185,11 +186,34 @@ public class CourseDaoOperation implements CourseDaoInterface {
 
     @Override
     public void incrementEnrolledStudents(int courseId) {
+        //Establishing the connection
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            //Declaring prepared statement and executing query
+            stmt = connection.prepareStatement(SQLQueries.INCREMENT_ENROLLED_STUDENTS);
+            stmt.setInt(1,courseId);
+            //Executing query
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
-
-
-
-
+    @Override
+    public void decrementEnrolledStudents(int courseId) {
+        //Establishing the connection
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            //Declaring prepared statement and executing query
+            stmt = connection.prepareStatement(SQLQueries.DECREMENT_ENROLLED_STUDENTS);
+            stmt.setInt(1,courseId);
+            //Executing query
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void getEligibleCoursesToSelectForStudent(Student student) {

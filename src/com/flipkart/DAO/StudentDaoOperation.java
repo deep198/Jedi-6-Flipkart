@@ -221,4 +221,38 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         return student;
     }
 
+    @Override
+    public boolean getPaymentStatus(int studentId){
+        Connection connection= DBConnectionHelper.getConnection();
+        PreparedStatement stmt= null;
+        boolean stat=false;
+        try {
+            stmt= connection.prepareStatement(SQLQueries.GET_PAY_STATUS);
+            stmt.setInt(1, studentId);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            stat=rs.getBoolean("paymentStatus");
+        }
+        catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return stat;
+    }
+
+    @Override
+    public void setPaymentStatus(int studentId){
+        //Establishing the connection
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt= null;
+        try {
+            //Declaring prepared statement and executing query
+            stmt = connection.prepareStatement(SQLQueries.SET_PAY_STATUS);
+            stmt.setInt(1, studentId);
+            //Executing query
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
 }

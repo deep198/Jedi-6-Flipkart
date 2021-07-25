@@ -41,6 +41,7 @@ public class CourseOperation implements CourseInterface {
     }
     public void deleteprofcourse(int courseId,int professorId)
     {
+        System.out.println("Entered deleteprofcourse in CourseOperation");
         CourseDaoInterface newprof=new CourseDaoOperation();
         newprof.deleteProfessorCourse(courseId, professorId);
     }

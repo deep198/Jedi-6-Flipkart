@@ -1,13 +1,13 @@
 package com.flipkart.DAO;
 
-import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
+import com.flipkart.exception.InvalidLoginException;
 
 public interface UserDaoInterface {
 
 
 
-    User validateUser(int userId, String password);
+    User validateUser(int userId, String password) throws InvalidLoginException;
 
     void updateUser(User user);
 
@@ -15,5 +15,4 @@ public interface UserDaoInterface {
 
     void updatePassword(int userId, String oldPswd, String newPswd);
 
-    void createStudent(Student student);
 }

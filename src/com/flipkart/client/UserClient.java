@@ -98,12 +98,9 @@ public class UserClient {
                     System.out.println("Enter your details : ");
                     System.out.println();
                     Student student = new Student();
-                    sc.nextLine();
-                    sc.nextLine();
                     System.out.println("Enter your name : ");
                     String name=sc.nextLine();
                     student.setName(name);
-                    sc.nextLine();
                     System.out.println("Enter your UserName : ");
                     String userName = sc.nextLine();
                     student.setUserName(userName);
@@ -113,7 +110,6 @@ public class UserClient {
                     System.out.println("Enter your Branch : ");
                     String branch = sc.next();
                     student.setDepartment(branch);
-                    sc.nextLine();
                     System.out.println("Enter your sem: ");
                     int sem = sc.nextInt();
                     student.setSem(sem);
@@ -144,7 +140,6 @@ public class UserClient {
             else
                 continue;
         }
-
         sc.close();
     }
 
