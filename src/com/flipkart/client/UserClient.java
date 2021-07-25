@@ -94,9 +94,8 @@ public class UserClient {
                     break;
 
                 case 2:
-                    System.out.println("**WELCOME NEW STUDENT****");
-                    System.out.println("Enter your details : ");
-                    System.out.println();
+                    System.out.println("****WELCOME NEW STUDENT****");
+                    System.out.println("***Enter your details***");
                     Student student = new Student();
                     System.out.println("Enter your name : ");
                     String name=sc.nextLine();

@@ -1,15 +1,17 @@
 package com.flipkart.DAO;
 import com.flipkart.bean.Course;
+import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
-import com.flipkart.constant.Grade;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.helper.CloseConnection;
 import com.flipkart.helper.DBConnectionHelper;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.flipkart.constant.SQLQueries.*;
+import static com.flipkart.constant.SQLQueries.DISPLAY_STUDENT;
+import static com.flipkart.constant.SQLQueries.DISPLAY_UNAPPROVED;
 
 public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
     // add a course by student
@@ -77,10 +79,29 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
     }
 
     @Override
-    public List<Grade> viewGrades(Student student) {
+    public List<RegisteredCourse> viewGrades(Student student) {
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(SQLQueries.VIEW_REGISTERED_COURSES);
+            stmt.setInt(1, student.getStudentId());
+            ResultSet rs = stmt.executeQuery();
+            List<RegisteredCourse> list = new ArrayList<RegisteredCourse>();
+            while (rs.next()) {
+                RegisteredCourse registeredCourse = new RegisteredCourse();
+                registeredCourse.setCourseId(rs.getInt("courseId"));
+                registeredCourse.setGrade(rs.getString("grade"));
+                registeredCourse.setMarks(rs.getInt("marks"));
+                list.add(registeredCourse);
+            }
+            return list;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
-    public List<Course> displayRegisteredCourses(Student student) {
+        public List<Course> displayRegisteredCourses(Student student) {
         Connection connection= DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
         try {

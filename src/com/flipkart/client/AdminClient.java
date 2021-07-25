@@ -1,5 +1,8 @@
 package com.flipkart.client;
-import com.flipkart.bean.*;
+import com.flipkart.bean.Admin;
+import com.flipkart.bean.Course;
+import com.flipkart.bean.Professor;
+import com.flipkart.bean.User;
 import com.flipkart.business.*;
 import com.flipkart.exception.CourseNotFoundException;
 
@@ -7,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
-import static com.flipkart.constant.UserRole.*;
 public class AdminClient {
     // initializing the scanner
     Scanner sc = new Scanner(System.in);
@@ -49,38 +50,35 @@ public class AdminClient {
                     switch(userRoleOption){
                         // if user is a professor
                         case 1:
-                            user = new User();
+                            Professor professor= new Professor();
+                            System.out.println("Enter Name: ");
+                            String name = sc.nextLine();
+                            professor.setName(name);
                             System.out.println("Enter UserName: ");
                             userName = sc.next();
-                            user.setUserName(userName);
-                            System.out.println("Enter Password: ");
-                            user.setPassword(sc.next());
-                            user.setUserRole(PROFESSOR);
-                            Professor professor= new Professor();
                             professor.setUserName(userName);
-                            System.out.println("Enter Name");
-                            professor.setName(sc.next());
+                            System.out.println("Enter Password: ");
+                            String password = sc.next();
+                            professor.setPassword(password);
                             System.out.println("Enter Department");
-                            professor.setDepartment(sc.next());
+                            String department = sc.next();
+                            professor.setDepartment(department);
                             // create professor
                             userId = adminOperation.createProfessor(professor);
                             System.out.println("Professor created with UserId: " + userId);
                             break;
                         //if user is an admin
                         case 2:
-                            user = new User();
+                            Admin newAdmin = new Admin();
+                            System.out.println("Enter Name: ");
+                            admin.setName(sc.nextLine());
                             System.out.println("Enter UserName: ");
-                            userName = sc.next();
-                            user.setUserName(userName);
+                            admin.setUserName(sc.nextLine());
                             System.out.println("Enter Password: ");
-                            user.setPassword(sc.next());
-                            user.setUserRole(ADMIN);
-                            Admin newAdmin= new Admin();
-                            newAdmin.setUserName(userName);
-                            System.out.println("Enter Name");
-                            newAdmin.setName(sc.next());
+                            admin.setPassword(sc.nextLine());
                             // create admin
                             userId = adminOperation.createAdmin(newAdmin);
+                            System.out.println("Admin is created with userId: " + userId);
                             break;
                     }
                     continue;

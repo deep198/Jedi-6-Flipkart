@@ -29,7 +29,7 @@ public class SQLQueries {
     public static final String FETCH_STUDENT = "SELECT * FROM CRS.student WHERE studentId=?";
     public static final String FETCH_ADMIN = "SELECT * FROM CRS.admin WHERE adminId=?";
     public static final String FETCH_PROF = "SELECT * FROM CRS.professor WHERE professorId=?";
-    public static final String VIEW_REGISTERED_COURSES = "SELECT courseId, studentId FROM CRS.registered_course where studentId = ?";
+    public static final String VIEW_REGISTERED_COURSES = "SELECT * FROM CRS.registered_course where studentId = ?";
     public static final String INSERT_STUDENT = "INSERT INTO CRS.student (name, department, sem, paymentStatus, isApproved) values (?,?,?,?,?)";
     public static final String REGISTER_COURSE_FOR_STUDENT = "INSERT into CRS.registered_course (studentId, courseId, sem) values (?,?,?)";
     public static final String DROP_COURSE_FOR_STUDENT = "DELETE from CRS.registered_course where studentId = ? AND courseId = ? AND sem = ?";

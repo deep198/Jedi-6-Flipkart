@@ -2,6 +2,7 @@ package com.flipkart.business;
 
 import com.flipkart.DAO.*;
 import com.flipkart.bean.Course;
+import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 
@@ -49,12 +50,16 @@ public class StudentOperation implements StudentInterface{
             System.out.println("Course Id : " + course.getCourseId());
         }
 
-
     }
 
     @Override
     public void viewGrades(Student student) {
-
+        StudentDaoInterface studentDaoOperation = new StudentDaoOperation();
+        List<RegisteredCourse> registeredCourses = studentDaoOperation.viewGrades(student);
+        System.out.println("SHOWING GRADES FOR " + student.getName());
+        for (RegisteredCourse course : registeredCourses) {
+            System.out.println("CourseId : " + course.getCourseId() + " Marks : " + course.getMarks() + " Grade : " + course.getMarks());
+        }
     }
 
     @Override
