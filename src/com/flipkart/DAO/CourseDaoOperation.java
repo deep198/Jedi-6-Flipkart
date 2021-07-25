@@ -11,9 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 public class CourseDaoOperation implements CourseDaoInterface {
-
     //List of Courses available to select for a student of particular branch and semester
     public List<Course> displayCourses(Student student) {
         //Establishing the connection
@@ -43,11 +41,37 @@ public class CourseDaoOperation implements CourseDaoInterface {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
         return null;
-
     }
+    @Override
+    public List<Course> selectedprofcourse(int professorid)
+    {
+        Connection connection = DBConnectionHelper.getConnection();
+        //Declaring prepared statement and executing query
+        PreparedStatement stmt = null;
+        try {
 
+            stmt = connection.prepareStatement(SQLQueries.VIEW_PROFESSOR_SELECTED_COURSE);
+            stmt.setInt(1, professorid);
+            ResultSet rs = stmt.executeQuery();
+            List<Course> list = new ArrayList<Course>();
+            //Creating ArrayList of Course
+            while (rs.next()) {
+                Course course = new Course();
+                course.setDepartment(rs.getString("department"));
+                course.setSem(rs.getInt("sem"));
+                course.setCourseId(rs.getInt("courseId"));
+                course.setCourseName(rs.getString("courseName"));
+                course.setCredits(rs.getInt("credits"));
+                course.setProfessorId(rs.getInt("professorId"));
+                list.add(course);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
     // Insert a new course in the database
     public void insertCourse(Course course) {
         //Establishing the connection
@@ -75,9 +99,7 @@ public class CourseDaoOperation implements CourseDaoInterface {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
     }
-
     // Remove a course from database
     public void deleteCourse(int courseId) throws CourseNotFoundException {
         //Establishing the connection
@@ -97,7 +119,6 @@ public class CourseDaoOperation implements CourseDaoInterface {
             System.out.println(ex.getMessage());
         }
     }
-
     public List<Course> displayCoursesProfessor() {
         Connection connection = DBConnectionHelper.getConnection();
         //Declaring prepared statement and executing query
@@ -126,7 +147,6 @@ public class CourseDaoOperation implements CourseDaoInterface {
 //		}
         return null;
     }
-
     public void deleteProfessorCourse(int courseId, int ProfessorID) {
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -146,7 +166,6 @@ public class CourseDaoOperation implements CourseDaoInterface {
             System.out.println(ex.getMessage());
         }
     }
-
     public void selectCourse(int courseId, int professorid) {
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -162,6 +181,15 @@ public class CourseDaoOperation implements CourseDaoInterface {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @Override
+    public void incrementEnrolledStudents(int courseId) {
+
+
+
+
+
     }
 
     public void getEligibleCoursesToSelectForStudent(Student student) {
@@ -191,6 +219,5 @@ public class CourseDaoOperation implements CourseDaoInterface {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 }

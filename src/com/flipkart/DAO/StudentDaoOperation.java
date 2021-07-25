@@ -29,6 +29,7 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
             System.out.println(ex.getMessage());
         }
     }
+
     // drop a course by student against a courseID
     public void dropCourse(int courseId, Student student) {
         //Establishing the connection
@@ -51,15 +52,34 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         System.out.println("Course not found !");
     }
+
     @Override
-    public List<Course> viewCourses(Student student) {
+    public List<Course> viewRegisteredCourses(Student student) {
+        Connection connection= DBConnectionHelper.getConnection();
+        PreparedStatement stmt= null;
+        try {
+            stmt= connection.prepareStatement(SQLQueries.VIEW_REGISTERED_COURSES);
+            stmt.setInt(1, student.getStudentId());
+            ResultSet rs = stmt.executeQuery();
+            List<Course> list= new ArrayList<Course>();
+            while(rs.next())
+            {
+                Course course = new Course();
+                course.setCourseId(rs.getInt("courseId"));
+                list.add(course);
+            }
+            return list;
+        }
+        catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
         return null;
     }
+
     @Override
     public List<Grade> viewGrades(Student student) {
         return null;
     }
-    // display list of courses selected by student
     public List<Course> displayRegisteredCourses(Student student) {
         Connection connection= DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
@@ -119,6 +139,7 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
             }
         }
     }
+
     @Override
     public void displayStudents() {
         Connection connection = DBConnectionHelper.getConnection();
@@ -144,7 +165,33 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
     }
 
-    public Student fetchStudent(int UserID){
+    @Override
+    public int createStudent(Student student) {
+        //Establishing the connection
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            //Declaring prepared statement and executing query
+            stmt = connection.prepareStatement(SQLQueries.INSERT_STUDENT);
+//            public static final String  INSERT_STUDENT = "INSERT INTO CRS.student (name, department, sem, paymentStatus, isApproved) values (?,?,?,?,)";
+            stmt.setString(1, student.getName());
+            stmt.setString(2, student.getDepartment());
+            stmt.setInt(3, student.getSem());
+            stmt.setBoolean(4, false);
+            stmt.setBoolean(5, false);
+            //Executing query
+            stmt.executeUpdate();
+            Statement stmt2 = connection.createStatement();
+            ResultSet rs = stmt2.executeQuery(SQLQueries.GET_RECENT_STUDENT_ID);
+            rs.next();
+            return rs.getInt("maxStudentId");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+    }
+        public Student fetchStudent(int UserID){
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;

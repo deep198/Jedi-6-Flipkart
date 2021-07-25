@@ -9,12 +9,11 @@ public interface StudentDaoInterface {
 
     public void addCourse(int courseId ,Student student) ;
     public void dropCourse(int courseId, Student student);
-    public List<Course> viewCourses(Student student);
+    List<Course> viewRegisteredCourses(Student student);
     public List<Grade> viewGrades(Student student);
     public void getUnapproved();
     public void approveStudent(List<Integer> students);
-
     Student fetchStudent(int userId);
-
     void displayStudents();
+    int createStudent(Student student);
 }

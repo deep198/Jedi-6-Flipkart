@@ -1,26 +1,21 @@
 package com.flipkart.business;
-
 import com.flipkart.bean.Professor;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.helper.DBConnectionHelper;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 public class ProfessorOperation implements ProfessorInterface{
     public void selectCourse(int courseId, Professor professor) {
         CourseInterface newCourse1=new CourseOperation();
         newCourse1.selectprofcourse(courseId , professor.getProfessorId());
     }
-
     @Override
-    public void displaySelectedCoursesProfessor(Professor professor) {
+    public void displayAvailableCoursesProfessor(Professor professor) {
         CourseInterface newCourse=new CourseOperation();
         newCourse.displayCoursesProfessor();
     }
-
     public Professor fetchProfessor(int UserID){
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -43,9 +38,14 @@ public class ProfessorOperation implements ProfessorInterface{
         }
         return professor;
     }
-    public void deselectcourse(int courseId,Professor prof)
+    public void deleteProfessorCourse(int courseId,Professor prof)
     {
         CourseInterface newCourse1=new CourseOperation();
         newCourse1.deleteprofcourse(courseId , prof.getProfessorId());
+    }
+    public void displaySelectedCoursesProfessor(Professor professor)
+    {
+        CourseInterface newCourse1=new CourseOperation();
+        newCourse1.displaySelectedProfCourse(professor);
     }
 }

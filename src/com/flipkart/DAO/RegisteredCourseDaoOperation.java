@@ -66,4 +66,22 @@ public class RegisteredCourseDaoOperation implements RegisteredCourseDaoInterfac
             System.out.println(ex.getMessage());
         }
     }
+
+    @Override
+    public void registerCourseForStudent(int studentId, int courseId) {
+        Connection connection = DBConnectionHelper.getConnection();
+        PreparedStatement stmt=null;
+        try {
+            //Declaring prepared statement and executing query
+            stmt = connection.prepareStatement(SQLQueries.REGISTER_COURSE_FOR_STUDENT);
+            stmt.setInt(1, studentId);
+            stmt.setInt(2, courseId);
+            //Executing query
+            stmt.executeUpdate();
+            System.out.println("Grade uploaded");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
 }

@@ -114,11 +114,15 @@ public class UserClient {
                     String branch = sc.next();
                     student.setDepartment(branch);
                     sc.nextLine();
+                    System.out.println("Enter your sem: ");
+                    int sem = sc.nextInt();
+                    student.setSem(sem);
                     System.out.println();
                     System.out.println(" Registering New Student to the System ...");
                     System.out.println();
-                    userOperation.createStudent(student);
-                    System.out.println("**New Student Created****");
+                    int studentId = userOperation.createStudent(student);
+                    System.out.println("**Your Profile has been successfully created****");
+                    System.out.println("Your userId is : " + studentId + " Please use this to login");
                     break;
 
                 //update password
@@ -132,7 +136,6 @@ public class UserClient {
                     System.out.println("Enter New Password");
                     String newPswd = sc.next();
                     sc.nextLine();
-
                     userOperation.updatePassword(userId, oldPswd, newPswd);
             }
 

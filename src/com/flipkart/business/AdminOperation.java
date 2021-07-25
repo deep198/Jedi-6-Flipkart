@@ -31,8 +31,8 @@ public class AdminOperation implements AdminInterface{
     }
     @Override
     public void displayStudents() {
-        //   dataAccess.displayStudents();
-        System.out.println("Display Student");
+        StudentDaoInterface studentDaoOperation = new StudentDaoOperation();
+        studentDaoOperation.displayStudents();
     }
     @Override
     public void displayProfessors() {

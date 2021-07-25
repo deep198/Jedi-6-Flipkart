@@ -16,7 +16,6 @@ public class SQLQueries {
     public static final String INSERT_COURSE="INSERT INTO CRS.course VALUES (?,?,?,?,?,?,?)";
     public static final String DELETE_COURSE="DELETE FROM CRS.course WHERE courseId = " ;
     public static final String DISPLAY_COURSES_PROFESSOR= "SELECT * FROM CRS.course WHERE professorId=-1" ;
-    //public static final String SELECT_COURSE="UPDATE course SET ProfessorID = ? WHERE CourseID=? ";
     public static final String DELETE_PROFESSOR_COURSE="UPDATE CRS.course SET professorId = -1 WHERE professorId = ? AND courseId=?";
     public static final String DISPLAY_UNAPPROVED = "SELECT * FROM CRS.student WHERE isApproved=FALSE";
     public static final String APPROVE_STUD = "UPDATE CRS.student SET isApproved=TRUE where studentId=?";
@@ -24,9 +23,14 @@ public class SQLQueries {
     public static final String UPLOAD_GRADES = "UPDATE CRS.registered_course SET marks = ? AND grade = ? WHERE studentId = ? AND courseId = ?";
     public static final String SELECT_PROFESSOR_COURSE= "UPDATE CRS.course SET professorId = ? WHERE courseId=? AND professorId=-1 ";
     public static final String GET_RECENT_PROF_ID = "SELECT MAX(professorId) as maxProfId FROM CRS.professor";
+    public static final String GET_RECENT_STUDENT_ID = "SELECT MAX(studentId) as maxStudentId FROM CRS.student";
     public static final String DISPLAY_STUDENT = "SELECT * FROM CRS.student";
     public static final String FETCH_STUDENT = "SELECT * FROM CRS.student WHERE studentId=?";
     public static final String FETCH_ADMIN = "SELECT * FROM CRS.admin WHERE adminId=?";
     public static final String FETCH_PROF = "SELECT * FROM CRS.professor WHERE professorId=?";
-
+    public static final String VIEW_REGISTERED_COURSES = "SELECT courseId, studentId FROM CRS.registered_course where studentId = ?";
+    public static final String INSERT_STUDENT = "INSERT INTO CRS.student (name, department, sem, paymentStatus, isApproved) values (?,?,?,?,)";
+    public static final String REGISTER_COURSE_FOR_STUDENT = "INSERT into CRS.registered_course (studentId, courseId) values (?,?)";
+    public static final String VIEW_PROFESSOR_SELECTED_COURSE="SELECT * FROM CRS.course WHERE professorId=?";
+    public static final String INCREMENT_ENROLLED_STUDENTS = "UPDATE CRS.course SET studentsEnrolled TO studentsEnrolled + 1";
 }

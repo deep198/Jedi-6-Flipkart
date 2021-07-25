@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.exception.CourseNotFoundException;
 
@@ -16,4 +17,6 @@ public interface CourseInterface {
     void deleteprofcourse(int courseId, int professorId);
 
     void selectprofcourse(int courseID, int professorId);
+
+    void displaySelectedProfCourse(Professor prof);
 }

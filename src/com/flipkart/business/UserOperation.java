@@ -1,5 +1,7 @@
 package com.flipkart.business;
 
+import com.flipkart.DAO.StudentDaoInterface;
+import com.flipkart.DAO.StudentDaoOperation;
 import com.flipkart.DAO.UserDaoInterface;
 import com.flipkart.DAO.UserDaoOperation;
 import com.flipkart.bean.Student;
@@ -9,6 +11,8 @@ import com.flipkart.exception.InvalidLoginException;
 public class UserOperation implements UserInterface{
 
     UserDaoInterface userDaoOperation = new UserDaoOperation();
+    StudentDaoInterface studentDaoOperation = new StudentDaoOperation();
+
 
     @Override
     public User validateLogin(int userId, String password) throws InvalidLoginException {
@@ -21,8 +25,9 @@ public class UserOperation implements UserInterface{
     }
 
     @Override
-    public void createStudent(Student student) {
-        userDaoOperation.createStudent(student);
+    public int createStudent(Student student) {
+        return studentDaoOperation.createStudent(student);
+
     }
 
     @Override

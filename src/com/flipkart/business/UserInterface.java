@@ -10,7 +10,7 @@ public interface UserInterface {
 
     void createUser(User user);
 
-    void createStudent(Student student);
+    int createStudent(Student student);
 
     void updatePassword(int userId, String oldPswd, String newPswd);
 }

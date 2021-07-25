@@ -2,11 +2,10 @@ package com.flipkart.business;
 import com.flipkart.DAO.CourseDaoInterface;
 import com.flipkart.DAO.CourseDaoOperation;
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.exception.CourseNotFoundException;
-
 import java.util.List;
-
 //import com.flipkart.DAO.AdminDaoInterface;
 //import com.flipkart.DAO.AdminDaoOperation;
 public class CourseOperation implements CourseInterface {
@@ -39,7 +38,6 @@ public class CourseOperation implements CourseInterface {
         // TODO Auto-generated method stub
         CourseDaoInterface newCourse=new CourseDaoOperation();
         newCourse.deleteCourse(courseId);
-
     }
     public void deleteprofcourse(int courseId,int professorId)
     {
@@ -51,5 +49,15 @@ public class CourseOperation implements CourseInterface {
     {
         CourseDaoInterface newprof1=new CourseDaoOperation();
         newprof1.selectCourse(courseID, professorId);
+    }
+    @Override
+    public void displaySelectedProfCourse(Professor prof)
+    {
+        System.out.println("****************************LIST OF SELECTED COURSES BY"+prof.getName()+" ************************************");
+        System.out.println("COURSE ID      COURSE TITLE        ");
+        CourseDaoInterface newCourse1=new CourseDaoOperation();
+        List<Course> courses = newCourse1.selectedprofcourse(prof.getProfessorId());
+        courses.forEach(course -> System.out.println(course.getCourseId()+"               "+course.getCourseName()+"               "));
+        System.out.println("******************************************************************************************");
     }
 }

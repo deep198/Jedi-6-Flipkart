@@ -1,18 +1,9 @@
 package com.flipkart.client;
+import com.flipkart.bean.Student;
+import com.flipkart.business.*;
+
 import java.util.Date;
 import java.util.Scanner;
-import com.flipkart.bean.Student;
-
-import com.flipkart.business.CourseInterface;
-import com.flipkart.business.CourseOperation;
-import com.flipkart.business.NotificationInterface;
-import com.flipkart.business.NotificationOperation;
-import com.flipkart.business.PaymentInterface;
-import com.flipkart.business.PaymentOperation;
-import com.flipkart.business.RegistrationInterface;
-import com.flipkart.business.RegistrationOperation;
-import com.flipkart.business.StudentInterface;
-import com.flipkart.business.StudentOperation;
 
 
 public class StudentClient {
@@ -43,10 +34,10 @@ public class StudentClient {
             // Menu for a Student
             System.out.println("Choose an option");
             System.out.println("1. View All Courses");
-            System.out.println("2. Add a course");
+            System.out.println("2. Register for a course");
             System.out.println("3. Drop a course");
             System.out.println("4. View Selected Courses");
-            System.out.println("5. Register for Semester");
+            System.out.println("5. Make semester registration payment");
             System.out.println("6. View Grades");
             System.out.println("7. Logout");
             option= sc.nextInt();
@@ -60,9 +51,10 @@ public class StudentClient {
                     // add a course by student
                 case 2:
                     if(!paymentOperation.getPaymentStatus(student.getStudentId())) {
-                        System.out.println("Enter Course ID to be added");
+                        System.out.println("Enter Course ID to be registered");
                         courseId= sc.nextInt();
-                        studentOperation.addCourse(courseId, student);
+                        studentOperation.registerForCourse(courseId, student);
+                        System.out.println("Successfully registered for Course " + courseId + " !!");
                     }
                     else {
                         System.out.println("Registration completed!");
@@ -89,7 +81,6 @@ public class StudentClient {
                     // Submit registration
                 case 5:
                     RegistrationInterface registrationOperation = new RegistrationOperation();
-
                     // if student has already completed registration
                     if(paymentOperation.getPaymentStatus(student.getStudentId())) {
                         System.out.println("Registration already completed !");
