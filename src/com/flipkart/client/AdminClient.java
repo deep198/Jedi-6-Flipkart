@@ -47,21 +47,26 @@ public class AdminClient {
                     System.out.println("2. Admin");
                     String userName;
                     userRoleOption = sc.nextInt();
+
                     switch(userRoleOption){
                         // if user is a professor
                         case 1:
                             Professor professor= new Professor();
+                            sc.nextLine();
                             System.out.println("Enter Name: ");
                             String name = sc.nextLine();
                             professor.setName(name);
-                            System.out.println("Enter UserName: ");
-                            userName = sc.next();
+                            System.out.println("Enter userName: ");
+                            userName = sc.nextLine();
+                            System.out.println(" : " + userName);
                             professor.setUserName(userName);
                             System.out.println("Enter Password: ");
-                            String password = sc.next();
+                            String password = sc.nextLine();
+                            System.out.println(" : " + password);
                             professor.setPassword(password);
                             System.out.println("Enter Department");
-                            String department = sc.next();
+                            String department = sc.nextLine();
+                            System.out.println(" : " + department);
                             professor.setDepartment(department);
                             // create professor
                             userId = adminOperation.createProfessor(professor);
@@ -70,12 +75,16 @@ public class AdminClient {
                         //if user is an admin
                         case 2:
                             Admin newAdmin = new Admin();
+                            sc.nextLine();
                             System.out.println("Enter Name: ");
-                            admin.setName(sc.nextLine());
+                            name = sc.nextLine();
+                            newAdmin.setName(name);
                             System.out.println("Enter UserName: ");
-                            admin.setUserName(sc.nextLine());
+                            userName = sc.nextLine();
+                            newAdmin.setUserName(userName);
                             System.out.println("Enter Password: ");
-                            admin.setPassword(sc.nextLine());
+                            password = sc.nextLine();
+                            newAdmin.setPassword(password);
                             // create admin
                             userId = adminOperation.createAdmin(newAdmin);
                             System.out.println("Admin is created with userId: " + userId);

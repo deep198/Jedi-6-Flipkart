@@ -128,7 +128,6 @@ public class CourseDaoOperation implements CourseDaoInterface {
             ResultSet rs = stmt.executeQuery();
             List<Course> list = new ArrayList<Course>();
             //Creating ArrayList of courses
-            System.out.println("Entered display courses professor  ");
             while (rs.next()) {
                 Course course = new Course();
                 course.setDepartment(rs.getString("department"));

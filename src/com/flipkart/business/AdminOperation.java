@@ -23,17 +23,21 @@ public class AdminOperation implements AdminInterface{
         user.setUserId(userId);
         user.setPassword(professor.getPassword());
         user.setUserRole(PROFESSOR);
+        user.setUserName(professor.getUserName());
         userDaoOperation.createUser(user);
         return userId;
     }
     @Override
     public int createAdmin(Admin admin) {
+        UserDaoInterface userDaoOperation = new UserDaoOperation();
         int userId = newAdmin.createAdmin(admin);
         User user = new User();
         user.setUserName(admin.getUserName());
         user.setUserRole(ADMIN);
-        user.setUserId(admin.getUserId());
+        user.setUserId(userId);
         user.setPassword(admin.getPassword());
+        user.setUserName(admin.getUserName());
+        userDaoOperation.createUser(user);
         return userId;
     }
 

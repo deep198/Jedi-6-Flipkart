@@ -19,7 +19,6 @@ public class UserOperation implements UserInterface{
     @Override
     public User validateLogin(int userId, String password) throws InvalidLoginException {
         return userDaoOperation.validateUser(userId, password);
-
     }
 
     @Override
