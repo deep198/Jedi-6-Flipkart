@@ -1,14 +1,15 @@
 package com.flipkart.helper;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DBConnectionHelper {
 
-    private static final String url = "jdbc:mysql://localhost";
-    private static final String user = "root";
-    private static final String password = "pass";
     private static Connection connection = null;
 
     public static Connection getConnection() {
@@ -17,12 +18,27 @@ public class DBConnectionHelper {
             return connection;
         else {
             try {
+                Properties prop = new Properties();
+                InputStream inputStream = DBConnectionHelper.class.getClassLoader().getResourceAsStream("configuration.properties");
+                prop.load(inputStream);
+                String driver = prop.getProperty("driver");
+                String url = prop.getProperty("url");
+                String user = prop.getProperty("user");
+                String password = prop.getProperty("password");
+                Class.forName(driver);
                 connection = DriverManager.getConnection(url, user, password);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return connection;
         }
+
 
     }
 

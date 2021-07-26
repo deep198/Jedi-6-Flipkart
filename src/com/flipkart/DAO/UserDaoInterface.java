@@ -1,6 +1,7 @@
 package com.flipkart.DAO;
 
 import com.flipkart.bean.User;
+import com.flipkart.exception.IncorrectOldPassword;
 import com.flipkart.exception.InvalidLoginException;
 import com.flipkart.exception.NotApprovedException;
 import com.flipkart.exception.UserNotFoundException;
@@ -13,6 +14,6 @@ public interface UserDaoInterface {
 
     void createUser(User user);
 
-    void updatePassword(int userId, String oldPswd, String newPswd);
+    void updatePassword(int userId, String oldPswd, String newPswd) throws IncorrectOldPassword;
 
 }

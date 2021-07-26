@@ -2,6 +2,7 @@ package com.flipkart.DAO;
 
 import com.flipkart.bean.User;
 import com.flipkart.constant.SQLQueries;
+import com.flipkart.exception.IncorrectOldPassword;
 import com.flipkart.exception.InvalidLoginException;
 import com.flipkart.exception.NotApprovedException;
 import com.flipkart.exception.UserNotFoundException;
@@ -45,7 +46,7 @@ public class UserDaoOperation implements UserDaoInterface{
     }
 
     @Override
-    public void updatePassword(int userId, String oldPswd, String newPswd) {
+    public void updatePassword(int userId, String oldPswd, String newPswd) throws IncorrectOldPassword {
 
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -64,7 +65,7 @@ public class UserDaoOperation implements UserDaoInterface{
                 stmt.setInt(2, userId);
                 stmt.executeUpdate();
             } else {
-                System.out.println("Wrong old password!!!");
+                throw new IncorrectOldPassword();
             }
 
         } catch (SQLException ex) {

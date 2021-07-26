@@ -5,6 +5,7 @@ import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.business.*;
 import com.flipkart.constant.Color;
+import com.flipkart.exception.IncorrectOldPassword;
 import com.flipkart.exception.InvalidLoginException;
 import com.flipkart.exception.NotApprovedException;
 import com.flipkart.exception.UserNotFoundException;
@@ -143,7 +144,12 @@ public class UserClient {
                     System.out.println("Enter New Password");
                     String newPswd = sc.next();
                     sc.nextLine();
-                    userOperation.updatePassword(userId, oldPswd, newPswd);
+                    try {
+                        userOperation.updatePassword(userId, oldPswd, newPswd);
+                    } catch (IncorrectOldPassword incorrectOldPassword) {
+                        logger.error(incorrectOldPassword.getMessage());
+                        break;
+                    }
                     System.out.println();
                     System.out.println(Color.CYAN_BACKGROUND.toString() + Color.BLACK_BOLD.toString()+"*************************Your Password has been reset************************"+ Color.RESET);
                     System.out.println();

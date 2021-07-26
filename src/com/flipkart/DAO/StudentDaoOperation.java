@@ -5,16 +5,23 @@ import com.flipkart.bean.Student;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.helper.CloseConnection;
 import com.flipkart.helper.DBConnectionHelper;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.flipkart.constant.SQLQueries.DISPLAY_STUDENT;
 import static com.flipkart.constant.SQLQueries.DISPLAY_UNAPPROVED;
-
+/*
+ *
+ * @author JEDI-Group05
+ * Interface for Course Operations
+ *
+ */
 public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
-    // add a course by student
+    /**
+     * Method to add Course in registered course database
+     * @param courseId: Add particular course
+     * @param student Object
+     */
     public void addCourse(int courseId ,Student student) {
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
@@ -31,10 +38,12 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
             System.out.println(ex.getMessage());
         }
     }
-
-    // drop a course by student against a courseID
+    /**
+     * Method to drop Course in registered course database
+     * @param courseId: student object containing all the fields
+     * @param student Object
+     */
     public void dropCourse(int courseId, Student student) {
-        //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
         try {
@@ -54,8 +63,11 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         System.out.println("Course not found !");
     }
-
-    @Override
+    /**
+     * Method to view registered course database
+     * @param student Object
+     * @return Courses registered by student
+     */
     public List<Course> viewRegisteredCourses(Student student) {
         Connection connection= DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
@@ -77,8 +89,11 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         return null;
     }
-
-    @Override
+    /**
+     * Method to view Grades of a student
+     * @param student Object
+     * @return Grade card of the student
+     */
     public List<RegisteredCourse> viewGrades(Student student) {
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt = null;
@@ -95,13 +110,12 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
                 list.add(registeredCourse);
             }
             return list;
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;
     }
-        public List<Course> displayRegisteredCourses(Student student) {
+    public List<Course> displayRegisteredCourses(Student student) {
         Connection connection= DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
         try {
@@ -123,6 +137,9 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         return null;
     }
+    /**
+     * Method to get list of Unapproved students
+     */
     public void getUnapproved(){
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -144,6 +161,11 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
             System.out.println(ex.getMessage());
         }
     }
+    /**
+     * Method to approve the student by admin
+     * @param students to get approved
+     *
+     */
     public void approveStudent(List<Integer> students){
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -160,8 +182,9 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
             }
         }
     }
-
-    @Override
+    /**
+     * Method to display list of students using SQL Command
+     */
     public void displayStudents() {
         Connection connection = DBConnectionHelper.getConnection();
         try {
@@ -185,13 +208,15 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
             System.out.println(ex.getMessage());
         }
     }
-
-    @Override
+    /**
+     * Method to create student using SQL Command
+     * @param student object :which contains the details of the student
+     * @return student ID
+     */
     public int createStudent(Student student) {
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt = null;
-
         try {
             //Declaring prepared statement and executing query
             stmt = connection.prepareStatement(SQLQueries.INSERT_STUDENT);
@@ -212,7 +237,12 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         return -1;
     }
-        public Student fetchStudent(int UserID){
+    /**
+     * Method to get the details of the student from particular student ID
+     * @param UserID :Similar to Student Id
+     * @return student Object
+     */
+    public Student fetchStudent(int UserID){
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
@@ -241,8 +271,11 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         return student;
     }
-
-    @Override
+    /**
+     * Method to get the Payment Status
+     * @param studentId :
+     * @return whether payment is done or not
+     */
     public boolean getPaymentStatus(int studentId){
         Connection connection= DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
@@ -259,8 +292,10 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
         }
         return stat;
     }
-
-    @Override
+    /**
+     * Method to set the payment status of particular student to true.
+     * @param studentId: Of a particular id
+     */
     public void setPaymentStatus(int studentId){
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -275,5 +310,4 @@ public class StudentDaoOperation implements StudentDaoInterface,CloseConnection{
             System.out.println(ex.getMessage());
         }
     }
-
 }

@@ -2,6 +2,7 @@ package com.flipkart.client;
 
 import com.flipkart.bean.Professor;
 import com.flipkart.business.*;
+import com.flipkart.constant.Color;
 
 import java.util.Scanner;
 
@@ -19,17 +20,22 @@ public class ProfessorClient {
 
 
         // professor client page contents
-        System.out.println("Successfully logged in as PROFESSOR  ");
+        System.out.println("\t\t\t"+Color.CYAN_BACKGROUND.toString() + Color.BLACK_BOLD.toString()+"Successfully logged in as PROFESSOR"+ Color.RESET);
         while(true) {
-            System.out.println("Welcome "+professor.getName()+" !");
+            System.out.println("\t\t\t\t\t"+Color.CYAN_BACKGROUND.toString() + Color.BLACK_BOLD.toString()+"Welcome "+professor.getName()+" !"+ Color.RESET);
             // display menu list for professor
-            System.out.println("Choose an option");
-            System.out.println("1. View Courses to teach");
-            System.out.println("2. Select a course");
-            System.out.println("3. Deselect a course");
-            System.out.println("4. View Selected Courses");
-            System.out.println("5. Upload Grades");
-            System.out.println("6. Logout");
+            System.out.print(Color.BLACK_BOLD);
+            System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
+            System.out.println("\t\t\t\t\t1. View Courses to teach");
+            System.out.println("\t\t\t\t\t2. Select a course");
+            System.out.println("\t\t\t\t\t3. Deselect a course");
+            System.out.println("\t\t\t\t\t4. View Selected Courses");
+            System.out.println("\t\t\t\t\t5. Upload Grades");
+            System.out.println("\t\t\t\t\t6. Logout");
+            System.out.print(Color.BLACK_BOLD);
+            System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
+            System.out.println("");
+            System.out.println(Color.CYAN_BACKGROUND.toString() + Color.BLACK_BOLD.toString()+" Choose the option you want :"+ Color.RESET);
             int choice= sc.nextInt();
             switch(choice) {
                 // display all the courses available for professor to teach
@@ -74,7 +80,8 @@ public class ProfessorClient {
                     continue;
                     // log out as a professor
                 case 6:
-                    System.out.println("Successfully logged out as on ");
+                    System.out.println(Color.CYAN_BACKGROUND.toString() + Color.BLACK_BOLD.toString()+" Logged out successfully "+ Color.RESET);
+                    System.out.println("");
                     break;
             }
             break;

@@ -6,9 +6,17 @@ import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.exception.CourseNotFoundException;
 import java.util.List;
-//import com.flipkart.DAO.AdminDaoInterface;
-//import com.flipkart.DAO.AdminDaoOperation;
+/**
+ *
+ * @author JEDI-Group05
+ * Implementation for Admin Operations
+ *
+ */
 public class CourseOperation implements CourseInterface {
+    /**
+     * Method to view valid course details for Student
+     * @param student Object storing student details
+     */
     public void viewCourses(Student student) {
         System.out.println("****************************************LIST OF AVAILABLE COURSES*****************************************1****");
         System.out.println("COURSE ID      COURSE NAME                       CREDITS         ");
@@ -21,6 +29,9 @@ public class CourseOperation implements CourseInterface {
         }
         System.out.println("*************************************************************************************************************");
     }
+    /**
+     * Method to view course details for Professor
+     */
     public void displayCoursesProfessor() {
         System.out.println("****************************LIST OF AVAILABLE COURSES************************************");
         System.out.println("COURSE ID      COURSE TITLE        ");
@@ -29,28 +40,50 @@ public class CourseOperation implements CourseInterface {
         courses.forEach(course -> System.out.println(course.getCourseId()+"               "+course.getCourseName()+"               "));
         System.out.println("******************************************************************************************");
     }
+    /**
+     * Method to add Course to DB
+     * @param course Object storing course details
+     */
     public void addCourse(Course course) {
         CourseDaoInterface addCourse=new CourseDaoOperation();
         addCourse.insertCourse(course);
     }
+    /**
+     * Method to delete Course from DB
+     * @param courseId ID of course to be deleted
+     * @exception CourseNotFoundException
+     */
     @Override
     public void deleteCourse(int courseId) throws CourseNotFoundException {
-        // TODO Auto-generated method stub
         CourseDaoInterface newCourse=new CourseDaoOperation();
         newCourse.deleteCourse(courseId);
     }
+    /**
+     * Method to delete course for a particular Professor
+     * @param courseId ID of course to deselect
+     * @param professorId ID of professor to deselect course
+     */
     public void deleteprofcourse(int courseId,int professorId)
     {
         System.out.println("Entered deleteprofcourse in CourseOperation");
         CourseDaoInterface newprof=new CourseDaoOperation();
         newprof.deleteProfessorCourse(courseId, professorId);
     }
+    /**
+     * Method to select course for a particular Professor
+     * @param courseID Id of course to be selected
+     * @param professorId Id of professor to select course
+     */
     @Override
     public void selectprofcourse(int courseID, int professorId)
     {
         CourseDaoInterface newprof1=new CourseDaoOperation();
         newprof1.selectCourse(courseID, professorId);
     }
+    /**
+     * Method to display course details taught by a particular Professor
+     * @param prof Professor object for whom selected courses are to be displayed
+     */
     @Override
     public void displaySelectedProfCourse(Professor prof)
     {

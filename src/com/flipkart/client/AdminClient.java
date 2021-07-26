@@ -4,8 +4,8 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.User;
 import com.flipkart.business.*;
+import com.flipkart.constant.Color;
 import com.flipkart.exception.CourseNotFoundException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,27 +27,26 @@ public class AdminClient {
         int userRoleOption;
         Date currentDate = new Date();
         // display contents of admin client landing page
-        System.out.println("Welcome "+ admin.getName()+" !");
+        System.out.println(Color.YELLOW_BACKGROUND.toString() + Color.BLACK_BOLD.toString() +"********************WELCOME "+ admin.getName()+" ****************************"+ Color.RESET);
         boolean login = true;
         while(true) {
             // diplay menu list for admin
-            System.out.println("Choose an option");
-            System.out.println("1. Create user");
-            System.out.println("2. Add a new Course");
-            System.out.println("3. Delete Course");
-            System.out.println("4. Display Users");
-            System.out.println("5. Student Approval");
-            System.out.println("6. Logout");
+            System.out.println("\t\t\t\t\t\tChoose an option");
+            System.out.println("\t\t\t\t\t\t1. Create user");
+            System.out.println("\t\t\t\t\t\t2. Add a new Course");
+            System.out.println("\t\t\t\t\t\t3. Delete Course");
+            System.out.println("\t\t\t\t\t\t4. Display Users");
+            System.out.println("\t\t\t\t\t\t5. Student Approval");
+            System.out.println("\t\t\t\t\t\t6. Logout");
             int choice = sc.nextInt();
             switch(choice) {
                 // create a new user
                 case 1:
-                    System.out.println("Enter User Role ");
-                    System.out.println("1. Professor");
-                    System.out.println("2. Admin");
+                    System.out.println("\t\t\t\t\t\tEnter User Role ");
+                    System.out.println("\t\t\t\t\t\t1. Professor");
+                    System.out.println("\t\t\t\t\t\t2. Admin");
                     String userName;
                     userRoleOption = sc.nextInt();
-
                     switch(userRoleOption){
                         // if user is a professor
                         case 1:
@@ -151,7 +150,6 @@ public class AdminClient {
                     System.out.println();
                     System.out.println("Enter the ID of the Student you wish to Approve : ");
                     System.out.println("Enter -1 when you are done");
-
                     while(true){
                         int studentID=sc.nextInt();
                         if (studentID == -1) break;
@@ -163,7 +161,8 @@ public class AdminClient {
                     continue;
                     // log out as admin
                 case 6:
-                    System.out.println("Succesfully logged out as on "+ currentDate);
+                    System.out.println(Color.CYAN_BACKGROUND.toString() + Color.BLACK_BOLD.toString()+"Succesfully logged out as on "+ currentDate);
+                    System.out.println(Color.RESET);
                     login = false;
                     break;
             }

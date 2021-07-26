@@ -4,13 +4,22 @@ import com.flipkart.constant.SQLQueries;
 import com.flipkart.helper.DBConnectionHelper;
 import java.sql.*;
 import static com.flipkart.constant.SQLQueries.DISPLAY_PROF;
+/*
+ *
+ * @author JEDI-Group05
+ * Interface for Course Operations
+ *
+ */
 public class ProfessorDaoOperation implements ProfessorDaoInterface {
-    @Override
+    /**
+     * Method to create Professor using SQL Command
+     *
+     * @param professor object : which contains the details of the Professor
+     * @return Professor ID
+     */
     public int createProfessor(Professor professor) {
-        //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt = null;
-
         try {
             //Declaring prepared statement and executing query
             stmt = connection.prepareStatement(SQLQueries.INSERT_PROF);
@@ -30,8 +39,10 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface {
         return -1;
     }
 
-    @Override
-    public void displayProfessors(){
+    /**
+     * Method to display list of Professors using SQL Command
+     */
+    public void displayProfessors() {
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
         try {
@@ -40,23 +51,28 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface {
             //Retrieving data
             ResultSet rs = stmt.executeQuery(DISPLAY_PROF);
             // iterate through the java resultset
-            while (rs.next())
-            {
+            while (rs.next()) {
                 String name = rs.getString("Name");
-                System.out.println("Name : "+name);
+                int profId = rs.getInt("professorId");
                 String dept = rs.getString("Department");
-                System.out.println("Department : "+dept);
+                System.out.println("Id : " + profId + "  Name : " + name + "  Department : " + dept);
             }
+            System.out.println();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    @Override
-    public Professor fetchProfessor(int UserID){
+    /**
+     * Method to get the details of the Professor from particular Professor ID
+     *
+     * @param UserID :Similar to Professor Id
+     * @return Professor Object
+     */
+    public Professor fetchProfessor(int UserID) {
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
-        PreparedStatement stmt= null;
+        PreparedStatement stmt = null;
         Professor professor = new Professor();
         professor.setProfessorId(UserID);
         try {

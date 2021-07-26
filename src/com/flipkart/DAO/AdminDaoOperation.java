@@ -53,10 +53,13 @@ public class AdminDaoOperation implements AdminDaoInterface {
             ResultSet rs = stmt.executeQuery(DISPLAY_ADMIN);
 
             // iterate through the java resultset
+            System.out.println("ID    \tName");
             while (rs.next()) {
                 String name = rs.getString("adminName");
-                System.out.println("Name : " + name);
+                int adminId = rs.getInt("adminId");
+                System.out.println(adminId+"  \t"+name);
             }
+            System.out.println();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

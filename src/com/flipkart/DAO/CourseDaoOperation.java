@@ -1,23 +1,27 @@
 package com.flipkart.DAO;
-
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.helper.DBConnectionHelper;
-import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ *
+ * @author JEDI-Group05
+ * Interface for Course Operations
+ *
+ */
 public class CourseDaoOperation implements CourseDaoInterface {
-
-    private static final Logger logger = Logger.getLogger(CourseDaoOperation.class.getName());
-
-    //List of Courses available to select for a student of particular branch and semester
+    /**
+     * Method to Display courses for student
+     * @param student object which contains the details of the student
+     * @return get the courses offered to students
+     */
     public List<Course> displayCourses(Student student) {
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -48,14 +52,17 @@ public class CourseDaoOperation implements CourseDaoInterface {
         }
         return null;
     }
-    @Override
-    public List<Course> selectedprofcourse(int professorid)
-    {
+
+    /**
+     * Professor can view the selected course
+     * @param professorid Id of professor who selected course
+     * @return get the list of courses for professor
+     */
+    public List<Course> selectedprofcourse(int professorid) {
         Connection connection = DBConnectionHelper.getConnection();
         //Declaring prepared statement and executing query
         PreparedStatement stmt = null;
         try {
-
             stmt = connection.prepareStatement(SQLQueries.VIEW_PROFESSOR_SELECTED_COURSE);
             stmt.setInt(1, professorid);
             ResultSet rs = stmt.executeQuery();
@@ -77,11 +84,13 @@ public class CourseDaoOperation implements CourseDaoInterface {
         }
         return null;
     }
-    // Insert a new course in the database
+
+    /**
+     * Admin can add the course in the DB
+     * @param course object which gives the details about the course
+     */
     public void insertCourse(Course course) {
-        //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
-        //Establishing the connection
         PreparedStatement stmt = null;
         try {
             //Declaring prepared statement and executing query
@@ -100,12 +109,16 @@ public class CourseDaoOperation implements CourseDaoInterface {
             stmt.setInt(7, 0);
             //Executing query
             stmt.executeUpdate();
-            logger.info("Course added!");
+            System.out.println("Course added!");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    // Remove a course from database
+
+    /**
+     * Admin can delete the course from the DB
+     * @param courseId Id which course to be dropped
+     */
     public void deleteCourse(int courseId) throws CourseNotFoundException {
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -116,7 +129,7 @@ public class CourseDaoOperation implements CourseDaoInterface {
             //Executing query
             int rs = stmt.executeUpdate();
             if (rs > 0) {
-                logger.info("Course with courseId " + courseId + " deleted !");
+                System.out.println("Course with courseId " + courseId + " deleted !");
                 return;
             }
             throw new CourseNotFoundException();
@@ -124,6 +137,11 @@ public class CourseDaoOperation implements CourseDaoInterface {
             System.out.println(ex.getMessage());
         }
     }
+
+    /**
+     * Display list of courses available for professor
+     * @return List of available courses for the professor
+     */
     public List<Course> displayCoursesProfessor() {
         Connection connection = DBConnectionHelper.getConnection();
         //Declaring prepared statement and executing query
@@ -151,11 +169,18 @@ public class CourseDaoOperation implements CourseDaoInterface {
 //		}
         return null;
     }
+
+    /**
+     * Professor can deselect a course
+     * @param courseId Id of which course to be dropped
+     * @param ProfessorID Id of professor who drops course
+     */
     public void deleteProfessorCourse(int courseId, int ProfessorID) {
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
         //Establishing the connection
         PreparedStatement stmt = null;
+        System.out.println("Entered deleteprofcourse in CourseDaoOperation");
         try {
             stmt = connection.prepareStatement(SQLQueries.DELETE_PROFESSOR_COURSE);
             stmt.setInt(1, ProfessorID);
@@ -163,13 +188,19 @@ public class CourseDaoOperation implements CourseDaoInterface {
             //Executing query
             int rs = stmt.executeUpdate();
             if (rs > 0) {
-                logger.info("Course Deselected!!");
+                System.out.println("Course Deselected");
                 return;
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
+
+    /**
+     * Professor can select a course
+     * @param courseId :which course to be dropped
+     * @param professorid Id of professor who selected course
+     */
     public void selectCourse(int courseId, int professorid) {
         //Establishing the connection
         Connection connection = DBConnectionHelper.getConnection();
@@ -181,12 +212,17 @@ public class CourseDaoOperation implements CourseDaoInterface {
             stmt.setInt(2, courseId);
             //Executing query
             stmt.executeUpdate();
-            logger.info("Course with courseId=" + courseId + " selected to teach!");
+            System.out.println("Course with courseId=" + courseId + " selected to teach!");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
+
+    /**
+     * SQL command to increment number of enrolled students in a course
+     * @param courseId Id of course for which enrolled students should be incremented
+     */
     @Override
     public void incrementEnrolledStudents(int courseId) {
         //Establishing the connection
@@ -195,7 +231,7 @@ public class CourseDaoOperation implements CourseDaoInterface {
         try {
             //Declaring prepared statement and executing query
             stmt = connection.prepareStatement(SQLQueries.INCREMENT_ENROLLED_STUDENTS);
-            stmt.setInt(1,courseId);
+            stmt.setInt(1, courseId);
             //Executing query
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -203,6 +239,10 @@ public class CourseDaoOperation implements CourseDaoInterface {
         }
     }
 
+    /**
+     * SQL command to decrement number of enrolled students in a course
+     * @param courseId Id of course for which enrolled students should be decremented
+     */
     @Override
     public void decrementEnrolledStudents(int courseId) {
         //Establishing the connection
@@ -211,7 +251,7 @@ public class CourseDaoOperation implements CourseDaoInterface {
         try {
             //Declaring prepared statement and executing query
             stmt = connection.prepareStatement(SQLQueries.DECREMENT_ENROLLED_STUDENTS);
-            stmt.setInt(1,courseId);
+            stmt.setInt(1, courseId);
             //Executing query
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -219,6 +259,10 @@ public class CourseDaoOperation implements CourseDaoInterface {
         }
     }
 
+    /**
+     * Eligible course for the students of given semester and branch
+     * @param student  details of the student
+     */
     public void getEligibleCoursesToSelectForStudent(Student student) {
         Connection connection = DBConnectionHelper.getConnection();
         //Declaring prepared statement and executing query

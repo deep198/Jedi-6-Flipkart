@@ -1,17 +1,28 @@
 package com.flipkart.business;
-
 import com.flipkart.DAO.StudentDaoInterface;
 import com.flipkart.DAO.StudentDaoOperation;
 import com.flipkart.bean.Student;
-
+/**
+ *
+ * @author JEDI-Group05
+ * Implementations of Payment Operations
+ */
 public class PaymentOperation implements PaymentInterface{
-
+    /**
+     * Method to get Payment Status
+     * @param studentId ID of student to get payment status
+     * @return Payment status
+     */
     @Override
     public boolean getPaymentStatus(int studentId) {
         StudentDaoInterface studentDao = new StudentDaoOperation();
         return studentDao.getPaymentStatus(studentId);
     }
-
+    /**
+     * Method to make Payment
+     * @param student Object storing student details
+     * @return fee based on Student details
+     */
     @Override
     public double makePayment(Student student) {
         int studentSem=student.getSem();
