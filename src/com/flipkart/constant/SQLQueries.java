@@ -37,10 +37,11 @@ public class SQLQueries {
     public static final String INCREMENT_ENROLLED_STUDENTS = "UPDATE CRS.course SET studentsEnrolled = studentsEnrolled + 1 where courseId = ?";
     public static final String DECREMENT_ENROLLED_STUDENTS = "UPDATE CRS.course SET studentsEnrolled = studentsEnrolled - 1 where courseId = ?";
     public static final String UPDATE_PASSWORD = "UPDATE CRS.user SET password = ? where userId = ?";
-    public static final String GET_PASSWORD = "SELECT password from CRS.user where userId = ?";
+    public static final String GET_PASSWORD = "SELECT * from CRS.user where userId = ?";
     public static final String SET_PAY_STATUS = "UPDATE CRS.student SET paymentStatus=TRUE where studentId=?";
     public static final String GET_PAY_STATUS = "SELECT * FROM CRS.student where studentId = ?";
     public static final String GENERATE_RECEIPT = "INSERT INTO CRS.paymentReceipt (studentId, sem, payableAmount,paymentMode) values  (?,?,?,?)";
     public static final String GET_REFERENCE_ID = "SELECT MAX(referenceId) as maxReferenceId FROM CRS.paymentReceipt";
     public static final String SHOW_RECEIPT = "SELECT * FROM CRS.paymentReceipt WHERE studentId=?";
+    public static final String GET_APPROVED_STATUS = "SELECT isApproved from CRS.student where studentId = ?";
 }

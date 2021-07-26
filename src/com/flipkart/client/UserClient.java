@@ -6,6 +6,7 @@ import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.business.*;
 import com.flipkart.exception.InvalidLoginException;
+import com.flipkart.exception.NotApprovedException;
 
 import java.util.Scanner;
 
@@ -53,7 +54,6 @@ public class UserClient {
                         String userRole = checkedUser.getUserRole();
                         String userName = checkedUser.getUserName();
                         userId = checkedUser.getUserId();
-                        System.out.println(checkedUser.getUserName() + " " + checkedUser.getUserId());
 
                         switch(userRole) {
                             // if user is a student
@@ -87,6 +87,9 @@ public class UserClient {
                     }
                     // catching the InvalidLoginException in catch block
                     catch(InvalidLoginException e){
+                        System.out.println(e.getMessage());
+                        continue;
+                    } catch (NotApprovedException e) {
                         System.out.println(e.getMessage());
                         continue;
                     }

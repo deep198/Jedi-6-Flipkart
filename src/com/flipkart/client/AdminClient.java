@@ -58,15 +58,12 @@ public class AdminClient {
                             professor.setName(name);
                             System.out.println("Enter userName: ");
                             userName = sc.nextLine();
-                            System.out.println(" : " + userName);
                             professor.setUserName(userName);
                             System.out.println("Enter Password: ");
                             String password = sc.nextLine();
-                            System.out.println(" : " + password);
                             professor.setPassword(password);
-                            System.out.println("Enter Department");
+                            System.out.println("Enter Department: ");
                             String department = sc.nextLine();
-                            System.out.println(" : " + department);
                             professor.setDepartment(department);
                             // create professor
                             userId = adminOperation.createProfessor(professor);
@@ -95,12 +92,16 @@ public class AdminClient {
                     // insert a new course
                 case 2:
                     Course course= new Course();
-                    System.out.println("Enter CousreId");
+                    System.out.println("Enter CousreId: ");
                     course.setCourseId(sc.nextInt());
-                    System.out.println("Enter Course Name");
+                    System.out.println("Enter Course Name: ");
                     course.setCourseName(sc.next());
-                    System.out.println("Enter Department ");
+                    System.out.println("Enter Department: ");
                     course.setDepartment(sc.next());
+                    System.out.println("Enter sem: ");
+                    course.setSem(sc.nextInt());
+                    System.out.println("Enter credits: ");
+                    course.setCredits(sc.nextInt());
                     // course added in the database
                     courseOperation.addCourse(course);
                     continue;

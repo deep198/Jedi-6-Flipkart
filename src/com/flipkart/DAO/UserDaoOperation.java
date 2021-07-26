@@ -3,6 +3,7 @@ package com.flipkart.DAO;
 import com.flipkart.bean.User;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.exception.InvalidLoginException;
+import com.flipkart.exception.NotApprovedException;
 import com.flipkart.helper.DBConnectionHelper;
 
 import java.sql.Connection;
@@ -72,7 +73,7 @@ public class UserDaoOperation implements UserDaoInterface{
 
 
     @Override
-    public User validateUser(int userId, String password) throws InvalidLoginException {
+    public User validateUser(int userId, String password) throws InvalidLoginException, NotApprovedException {
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
 
@@ -83,6 +84,19 @@ public class UserDaoOperation implements UserDaoInterface{
             ResultSet rs = stmt.executeQuery();
             rs.next();
             String pswd = rs.getString("password");
+            String userRole = rs.getString("userRole");
+            if (userRole.equals("STUDENT")) {
+                stmt = connection.prepareStatement(SQLQueries.GET_APPROVED_STATUS);
+                stmt.setInt(1, userId);
+                rs = stmt.executeQuery();
+                rs.next();
+                Boolean approvedStatus = rs.getBoolean("isApproved");
+                if (! approvedStatus) {
+                    throw new NotApprovedException();
+                }
+
+            }
+
             if (!pswd.equals(password)) {
                 throw new InvalidLoginException();
             }
