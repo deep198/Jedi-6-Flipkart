@@ -8,6 +8,7 @@ import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.exception.InvalidLoginException;
 import com.flipkart.exception.NotApprovedException;
+import com.flipkart.exception.UserNotFoundException;
 
 import static com.flipkart.constant.UserRole.STUDENT;
 
@@ -18,7 +19,7 @@ public class UserOperation implements UserInterface{
 
 
     @Override
-    public User validateLogin(int userId, String password) throws InvalidLoginException, NotApprovedException {
+    public User validateLogin(int userId, String password) throws InvalidLoginException, NotApprovedException, UserNotFoundException {
         return userDaoOperation.validateUser(userId, password);
     }
 

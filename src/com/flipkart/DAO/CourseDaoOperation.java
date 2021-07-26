@@ -1,9 +1,11 @@
 package com.flipkart.DAO;
+
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.helper.DBConnectionHelper;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 public class CourseDaoOperation implements CourseDaoInterface {
+
+    private static final Logger logger = Logger.getLogger(CourseDaoOperation.class.getName());
+
     //List of Courses available to select for a student of particular branch and semester
     public List<Course> displayCourses(Student student) {
         //Establishing the connection
@@ -95,7 +100,7 @@ public class CourseDaoOperation implements CourseDaoInterface {
             stmt.setInt(7, 0);
             //Executing query
             stmt.executeUpdate();
-            System.out.println("Course added!");
+            logger.info("Course added!");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -111,7 +116,7 @@ public class CourseDaoOperation implements CourseDaoInterface {
             //Executing query
             int rs = stmt.executeUpdate();
             if (rs > 0) {
-                System.out.println("Course with courseId " + courseId + " deleted !");
+                logger.info("Course with courseId " + courseId + " deleted !");
                 return;
             }
             throw new CourseNotFoundException();
@@ -158,7 +163,7 @@ public class CourseDaoOperation implements CourseDaoInterface {
             //Executing query
             int rs = stmt.executeUpdate();
             if (rs > 0) {
-                System.out.println("Course Deselected");
+                logger.info("Course Deselected!!");
                 return;
             }
         } catch (SQLException ex) {
@@ -176,7 +181,7 @@ public class CourseDaoOperation implements CourseDaoInterface {
             stmt.setInt(2, courseId);
             //Executing query
             stmt.executeUpdate();
-            System.out.println("Course with courseId=" + courseId + " selected to teach!");
+            logger.info("Course with courseId=" + courseId + " selected to teach!");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

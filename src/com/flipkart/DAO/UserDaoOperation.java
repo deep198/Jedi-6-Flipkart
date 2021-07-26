@@ -4,6 +4,7 @@ import com.flipkart.bean.User;
 import com.flipkart.constant.SQLQueries;
 import com.flipkart.exception.InvalidLoginException;
 import com.flipkart.exception.NotApprovedException;
+import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.helper.DBConnectionHelper;
 
 import java.sql.Connection;
@@ -73,7 +74,7 @@ public class UserDaoOperation implements UserDaoInterface{
 
 
     @Override
-    public User validateUser(int userId, String password) throws InvalidLoginException, NotApprovedException {
+    public User validateUser(int userId, String password) throws InvalidLoginException, NotApprovedException, UserNotFoundException {
         Connection connection = DBConnectionHelper.getConnection();
         PreparedStatement stmt= null;
 
@@ -94,7 +95,6 @@ public class UserDaoOperation implements UserDaoInterface{
                 if (! approvedStatus) {
                     throw new NotApprovedException();
                 }
-
             }
 
             if (!pswd.equals(password)) {
@@ -112,13 +112,15 @@ public class UserDaoOperation implements UserDaoInterface{
                 checkeduser.setUserName( rs.getString("userName") );
                 checkeduser.setUserRole(rs.getString("userRole"));
                 checkeduser.setUserId(rs.getInt("userId"));
-
                 return checkeduser;
+            } else {
+                throw new UserNotFoundException();
             }
         } catch (SQLException ex) {
+            if (ex.getMessage().equals("Illegal operation on empty result set.")) throw new UserNotFoundException();
             System.out.println(ex.getMessage());
         }
-        return null;
+        throw new UserNotFoundException();
     }
 
     @Override

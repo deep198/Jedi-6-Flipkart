@@ -5,6 +5,7 @@ import com.flipkart.DAO.RegisteredCourseDaoOperation;
 import com.flipkart.bean.Student;
 import com.flipkart.business.*;
 import com.flipkart.constant.Color;
+import org.apache.log4j.Logger;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 
 public class StudentClient {
 
-
+    private static final Logger logger = Logger.getLogger(StudentClient.class.getName());
     Scanner sc= new Scanner(System.in);
 
     // studentClient page
@@ -31,23 +32,24 @@ public class StudentClient {
 
 
         //student client landing page contents
-        System.out.println("Successfully logged in as STUDENT");
+        logger.info("Successfully logged in as STUDENT");
+        System.out.println("Welcome "+student.getName()+"!");
         while(true) {
-            System.out.println("Welcome "+student.getName()+"!");
             System.out.print(Color.BLACK_BOLD);
             System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
 //            System.out.println("*********************************************************************");
             // Menu for a Student
-            System.out.println("Choose an option");
-            System.out.println("1. View Available Courses");
-            System.out.println("2. Register for a course");
-            System.out.println("3. Drop a course");
-            System.out.println("4. View Registered Courses: ");
-            System.out.println("5. Make semester registration payment");
-            System.out.println("6. View Grades");
-            System.out.println("7. Logout");
+            System.out.println("\t\t\t\t\t1. View Available Courses");
+            System.out.println("\t\t\t\t\t2. Register for a course");
+            System.out.println("\t\t\t\t\t3. Drop a course");
+            System.out.println("\t\t\t\t\t4. View Registered Courses: ");
+            System.out.println("\t\t\t\t\t5. Make semester registration payment");
+            System.out.println("\t\t\t\t\t6. View Grades");
+            System.out.println("\t\t\t\t\t7. Logout");
             System.out.print(Color.BLACK_BOLD);
             System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
+            System.out.println("");
+            System.out.println(Color.CYAN_BACKGROUND.toString() + Color.BLACK_BOLD.toString()+" Choose the option you want :"+ Color.RESET);
             option= sc.nextInt();
 
             switch(option) {
@@ -94,8 +96,8 @@ public class StudentClient {
                         System.out.println("Registration already complete!");
                         System.out.print(Color.BLACK_BOLD);
                         System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
-                        System.out.println("1. Show Registration Receipt");
-                        System.out.println("2. Back to main menu");
+                        System.out.println("\t\t\t\t\t1. Show Registration Receipt");
+                        System.out.println("\t\t\t\t\t2. Back to main menu");
                         System.out.print(Color.BLACK_BOLD);
                         System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
                         option = sc.nextInt();
@@ -130,8 +132,8 @@ public class StudentClient {
                         // Further Options
                         System.out.print(Color.BLACK_BOLD);
                         System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
-                        System.out.println("1. Submit Registration");
-                        System.out.println("2. Back to main menu");
+                        System.out.println("\t\t\t\t\t1. Submit Registration");
+                        System.out.println("\t\t\t\t\t2. Back to main menu");
                         System.out.print(Color.BLACK_BOLD);
                         System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
                         option= sc.nextInt();
@@ -152,8 +154,8 @@ public class StudentClient {
                                 // Further Options
                                 System.out.print(Color.BLACK_BOLD);
                                 System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
-                                System.out.println("1. Pay Fees");
-                                System.out.println("2. Back to main menu");
+                                System.out.println("\t\t\t\t\t1. Pay Fees");
+                                System.out.println("\t\t\t\t\t2. Back to main menu");
                                 System.out.print(Color.BLACK_BOLD);
                                 System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
 
@@ -165,10 +167,10 @@ public class StudentClient {
                                         System.out.print(Color.BLACK_BOLD);
                                         System.out.println(Color.YELLOW_BACKGROUND +"************************PAYMENT GATEWAY******************************" + Color.RESET);
 //                                    System.out.println("************************PAYMENT GATEWAY******************************");
-                                        System.out.println("Choose the mode of payment");
-                                        System.out.println("1. Card");
-                                        System.out.println("2. E-Wallet");
-                                        System.out.println("3. Netbanking");
+                                        System.out.println("\t\t\t\t\tChoose the mode of payment");
+                                        System.out.println("\t\t\t\t\t1. Card");
+                                        System.out.println("\t\t\t\t\t2. E-Wallet");
+                                        System.out.println("\t\t\t\t\t3. Netbanking");
                                         System.out.print(Color.BLACK_BOLD);
                                         System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
                                         int paymentOption= sc.nextInt();
@@ -197,8 +199,8 @@ public class StudentClient {
                                         // listing further actions
                                         System.out.print(Color.BLACK_BOLD);
                                         System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
-                                        System.out.println("1. Show Registration Receipt");
-                                        System.out.println("2. Back to main menu");
+                                        System.out.println("\t\t\t\t\t1. Show Registration Receipt");
+                                        System.out.println("\t\t\t\t\t2. Back to main menu");
                                         System.out.print(Color.BLACK_BOLD);
                                         System.out.println(Color.YELLOW_BACKGROUND +"*********************************************************************" + Color.RESET);
                                         int option3= sc.nextInt();

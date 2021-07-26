@@ -4,10 +4,11 @@ import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
 import com.flipkart.exception.InvalidLoginException;
 import com.flipkart.exception.NotApprovedException;
+import com.flipkart.exception.UserNotFoundException;
 
 public interface UserInterface {
 
-    User validateLogin(int userId, String password)throws InvalidLoginException, NotApprovedException;
+    User validateLogin(int userId, String password)throws InvalidLoginException, NotApprovedException, UserNotFoundException;
 
     void createUser(User user);
 
