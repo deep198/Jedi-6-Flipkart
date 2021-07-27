@@ -77,7 +77,7 @@ public class StudentOperation implements StudentInterface{
         List<RegisteredCourse> registeredCourses = studentDaoOperation.viewGrades(student);
         System.out.println("SHOWING GRADES FOR " + student.getName());
         for (RegisteredCourse course : registeredCourses) {
-            System.out.println("CourseId : " + course.getCourseId() + " Marks : " + course.getMarks() + " Grade : " + course.getMarks());
+            System.out.println("CourseId : " + course.getCourseId() + " Marks : " + course.getMarks() + " Grade : " + course.getGrade());
         }
     }
     /**

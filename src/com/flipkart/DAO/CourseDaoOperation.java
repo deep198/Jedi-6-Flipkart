@@ -180,7 +180,6 @@ public class CourseDaoOperation implements CourseDaoInterface {
         Connection connection = DBConnectionHelper.getConnection();
         //Establishing the connection
         PreparedStatement stmt = null;
-        System.out.println("Entered deleteprofcourse in CourseDaoOperation");
         try {
             stmt = connection.prepareStatement(SQLQueries.DELETE_PROFESSOR_COURSE);
             stmt.setInt(1, ProfessorID);
